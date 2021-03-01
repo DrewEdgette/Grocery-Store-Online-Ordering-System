@@ -1,0 +1,7 @@
+Download XAMPP and run apache server - https://www.apachefriends.org/download.html
+
+Place addemp folder within xampp htdocs
+
+Download Composer - https://getcomposer.org/download/
+
+In addemp project location, run composer require vlucas/phpdotenv
