@@ -30,6 +30,8 @@
         <input type="submit" value="Add Employee">
     </form>
 
+  <a href='viewdb.php'>View Database</a>
+
 </body>
 
 </html>
