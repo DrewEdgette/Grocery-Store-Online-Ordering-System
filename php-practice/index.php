@@ -10,7 +10,7 @@
         }
     </style>
 
-    <title>Add Employee</title>
+    <title>Add Customer</title>
 </head>
 
 <body>
