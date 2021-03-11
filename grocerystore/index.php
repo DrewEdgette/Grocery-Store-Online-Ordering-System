@@ -1,44 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
-    <title>5 Brothers Grocery</title>
-</head>
-
+<?php
+    include "header.php";
+?>
 
 <body>
-
-    <div class="topnav">
-        <a class="active" href="">Home</a>
-        <a href="signin/">Sign in</a>
-        <input type="text" placeholder="Search..." id="search" onkeypress="">
-    </div>
-
     <div class="greeting">
         <h1>Welcome to the 5 Brothers' Grocery Closet Online Website</h1>
     </div>
 
-    <img src="home_image.jpg" alt="Trulli" width="100%">
+    <img src="images/home_image.jpg" alt="Trulli" width="100%">
 
-
-
-    <div class="body-options">
-        <h2>Would you like to:</h2>
-        <button onclick="document.location='signin/'">Sign In</button>
-        <h3>Or</h3>
-        <button onclick="document.location='signin/signup.php'">Sign Up</button>
-    </div>
-
-    
-    <footer>
-        <p>© Five Brothers Grocery 2021. All rights reserved.</p>
-    </footer>
 
  </body>
+
+ <footer>
+    <p>© Five Brothers Grocery 2021. All rights reserved.</p>
+</footer>
