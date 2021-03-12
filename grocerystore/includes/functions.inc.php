@@ -48,8 +48,7 @@ function getUser($connect,$email) {
     }
 
     else {
-        $result = false;
-        return $result;
+        return false
     }
 
     mysqli_stmt_close($stmt);
