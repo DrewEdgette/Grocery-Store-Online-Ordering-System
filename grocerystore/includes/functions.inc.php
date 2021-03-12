@@ -2,15 +2,14 @@
 
 // determines whether any input field is empty
 function inputIsEmpty($userInfo) {
-    $result = false;
 
     foreach($userInfo as $item) {
         if (empty($item)) {
-            $result = true;
+            return true;
             break;
         }
     }
-    return $result;
+    return false;
 }
 
 
