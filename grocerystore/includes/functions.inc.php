@@ -21,7 +21,7 @@ function emailIsValid($email) {
 
 
 
-// determines passwordn fields match
+// determines if password fields match
 function passwordsMatch($pwd,$pwdRepeat) {
     return ($pwd === $pwdRepeat);
 }
