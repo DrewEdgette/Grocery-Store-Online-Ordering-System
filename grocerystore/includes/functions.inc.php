@@ -6,7 +6,6 @@ function inputIsEmpty($userInfo) {
     foreach($userInfo as $item) {
         if (empty($item)) {
             return true;
-            break;
         }
     }
     return false;
