@@ -47,20 +47,24 @@ class users extends Controller {
                 $data["emptyinput"] = "Please fill out all fields.";
             }
 
-            if ($this->userModel->getUser($data["email"])) {
+            if ($this->userModel->userExists($data["email"])) {
                 $_POST["error"] = "emailtaken";
                 $data["emailtaken"] = "Email already in use.";
             }
 
             $data["pwd"] = password_hash($data["pwd"], PASSWORD_DEFAULT);
 
-            if ($this->userModel->register($data)) {
-                header("location: /grocerystore/users/login");
+            if (empty($data["emptyinput"]) && empty($data["pwdmatch"]) && empty($data["invalidemail"]) && empty($data["emailtaken"])) {
+                if ($this->userModel->register($data)) {
+                    header("location: /grocerystore/users/login");
+                }
+
+                else {
+                    die("Something went wrong.");
+                }
+    
             }
 
-            else {
-                die("Something went wrong.");
-            }
 
 
         }
