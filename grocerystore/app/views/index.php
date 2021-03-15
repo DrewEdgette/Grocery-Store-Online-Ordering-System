@@ -10,8 +10,8 @@
     <img src="/grocerystore/public/images/home_image.jpg" alt="Trulli" width="100%">
 
 
- </body>
+    <?php
+    require APPROOT . "/views/includes/footer.php";
+    ?>
 
- <footer>
-    <p>© Five Brothers Grocery 2021. All rights reserved.</p>
-</footer>
+ </body>

@@ -124,46 +124,33 @@ class users extends Controller {
 
     public function account() {
         $data = $this->data;
-        $user = null;
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
-            $data = [
-                'email' => $_POST["email"],
-                'pwd' => $_POST["pwd"],
-                'emptyinput' => '',
-                'wrongpwd' => '',
-                'stmtfailed' => ''
-            ];
-
-            $userInfo = array($data["email"],$data["pwd"]);
-
-            if ($this->inputIsEmpty($userInfo)) {
-                $_POST["error"] = "emptyinput";
-                $data["emptyinput"] = "Please fill out both fields.";
-            }
-            
-            if (empty($data["emptyinput"]) && empty($data["wrongpwd"])) {
-                $user = $this->userModel->login($data["email"], $data["pwd"]);
-
-                if ($user) {
-                    session_start();
-                    $_SESSION["userid"] = $user->customer_id;
-                    $_SESSION["username"] = $user->full_name;
-                    $_SESSION["email"] = $user->email;
-
-                    header("location: /grocerystore");
-                }
-
-                else {
-                    $_POST["error"] = "wrongpwd";
-                    $data["wrongpwd"] = "Incorrect email or password.";
-                }
-            }
-        }
+    
 
         $this->view('users/account', $data);
+    }
+
+
+    public function orders() {
+        $data = $this->data;
+      
+
+        $this->view('users/orders', $data);
+    }
+
+    public function addresses() {
+        $data = $this->data;
+  
+
+        $this->view('users/addresses', $data);
+    }
+
+    public function security() {
+        $data = [
+            'name' => $_SESSION["username"],
+            'email' => $_SESSION["email"],
+        ];
+
+        $this->view('users/security', $data);
     }
 
 

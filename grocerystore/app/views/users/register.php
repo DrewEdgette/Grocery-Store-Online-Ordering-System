@@ -66,6 +66,10 @@
         <button onclick="document.location='login'">Sign-In</button>
     </div>
 
+    <?php
+    require APPROOT . "/views/includes/footer.php";
+    ?>
+
 </body>
 
 </html>

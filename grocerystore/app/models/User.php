@@ -21,6 +21,11 @@
             $this->db->query("SELECT * FROM customers WHERE email=:email;");
             $this->db->bind(":email", $email);
 
+            // check if that email is even in the database
+            if (!$this->userExists($email)) {
+                return false;
+            }
+
             $user = $this->db->single();
             $pwdHashed = $user->customer_password;
             return password_verify($pwd,$pwdHashed) ? $user : false;

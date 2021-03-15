@@ -3,6 +3,7 @@
 ?>
 
 <body>
+    
 
     <div class="signin-signup">
 
@@ -49,6 +50,13 @@
         <button onclick="document.location='register'">Create an account</button>
     </div>
 
+
+    <?php
+    require APPROOT . "/views/includes/footer.php";
+    ?>
+
 </body>
+</div>
+
 
 </html>
