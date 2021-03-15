@@ -161,8 +161,6 @@ class users extends Controller {
                     $data["wrongpwd"] = "Incorrect email or password.";
                 }
             }
-            
-
         }
 
         $this->view('users/account', $data);
@@ -192,7 +190,7 @@ class users extends Controller {
         return ($pwd === $pwdRepeat);
     } 
 
-
+    // logs the user out
     public function logout() {
         $data = [];
         unset($_SESSION["userid"]);
