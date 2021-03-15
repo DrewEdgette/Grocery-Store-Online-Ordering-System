@@ -151,14 +151,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php
 
-        echo $_SESSION["username"];
-
-        echo "<br>";
-
-        echo $_SESSION["email"];
-
-                echo "<br>";
-
                 $address = 'Enter Address';
 
                 $street = 'Enter Street';
