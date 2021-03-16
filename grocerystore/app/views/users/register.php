@@ -3,7 +3,9 @@
 ?>
 
 <body>
-    <div class="signin-signup">
+
+    <div class="main-area">
+    <div class="section-box">
 
         <h1>Create Account</h1>
 
@@ -64,6 +66,8 @@
     <div class="goto-signup">
         <p>Already have an account?</p>
         <button onclick="document.location='login'">Sign-In</button>
+    </div>
+
     </div>
 
     <?php

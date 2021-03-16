@@ -4,8 +4,10 @@
 
 <body>
     
+    <div class="main-area">
 
-    <div class="signin-signup">
+
+    <div class="section-box">
 
         <h1>Sign-In</h1>
 
@@ -50,13 +52,13 @@
         <button onclick="document.location='register'">Create an account</button>
     </div>
 
+    </div>
+
 
     <?php
     require APPROOT . "/views/includes/footer.php";
     ?>
 
 </body>
-</div>
-
 
 </html>
