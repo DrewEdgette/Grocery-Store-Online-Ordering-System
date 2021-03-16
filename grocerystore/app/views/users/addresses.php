@@ -5,9 +5,11 @@
 
 <body>
 
-<div class="signin-signup">
+<div class="main-area">
 
-<h1>My Addresses</h1>
+<div class="section-box">
+
+<div class="my-account"><h1>Your Addresses</h1></div>
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
 
@@ -44,6 +46,7 @@
 </form>
 
 </div>
+
 
 <?php
 
@@ -139,6 +142,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 ?>
 
+</div>
+
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
@@ -147,7 +152,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </html>
 
-<body>
 
     <?php
 

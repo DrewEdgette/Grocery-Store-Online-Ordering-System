@@ -32,6 +32,8 @@
             }
         ?>
 
-        <input type="text" placeholder="Search..." id="search" onkeypress="">
+        <form action="/grocerystore/items/search" method="GET">
+        <input type="text" name="query" type="submit" placeholder="Search here and press ENTER..."/>
+        </form>
 </div>
 
