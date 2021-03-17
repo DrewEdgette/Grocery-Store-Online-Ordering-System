@@ -4,10 +4,10 @@ import mysql.connector as mysqlc
 
 # creates database connection
 db = mysqlc.connect(
-    host="database-1.cyusndka2jzz.us-east-2.rds.amazonaws.com",
+    host="",
     user="admin",
-    password="seniorproject2021",
-    database="grocery_store"
+    password="",
+    database=""
     )
 
 # gets the first 100 item names
