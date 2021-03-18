@@ -14,4 +14,13 @@
             return $this->db->resultSet();
         }
 
+
+        // gets item by id
+        public function getItem($id) {
+            $this->db->query("SELECT * FROM items WHERE item_id = :item_id");
+            $this->db->bind(":item_id", $id);
+
+            return $this->db->single();
+        }
+
 }

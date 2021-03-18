@@ -28,11 +28,29 @@ class Items extends Controller {
 
             else {
                 foreach($results as $result) {
-                    $data["results"] .= "<div class='clickable-section-box'>" . $result->item_name . " <img src='" . $result->image_url . "'> </div>";
+                    $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/items/info?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> </div>";
                 }
             }
         }
 
         $this->view('items/search', $data);
+    }
+
+
+    public function info() {
+        $data = $this->data;
+
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+
+            $data = [
+                "itemID" => $_GET["id"],
+                "item" => null
+            ];
+
+            $data["item"] = $this->userModel->getItem($data["itemID"]);
+        }
+
+        $this->view('items/info', $data);
     }
 }
