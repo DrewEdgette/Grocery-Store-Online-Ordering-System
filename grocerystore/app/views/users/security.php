@@ -24,11 +24,11 @@ echo "<input type='text' name='email' placeholder='Change Email'>";
 
 echo "<h2>Password</h2>";
 echo "......";
-echo "<input type='text' name='pwd' placeholder='Change Password'>";
+echo "<input type='password' name='pwd' placeholder='Change Password'>";
 
 ?>
 
-<input type="submit" >
+<input type="submit" name="submit" value="Update information">
 
 </div>
     

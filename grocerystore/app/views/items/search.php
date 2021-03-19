@@ -16,5 +16,4 @@
     require APPROOT . "/views/includes/footer.php";
 ?>
 </body>
-
 </html>

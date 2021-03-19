@@ -28,6 +28,7 @@
 
             $user = $this->db->single();
             $pwdHashed = $user->customer_password;
+
             return password_verify($pwd,$pwdHashed) ? $user : false;
         }
 
@@ -37,5 +38,25 @@
             $this->db->bind(":email", $email);
 
             return ($this->db->rowCount() > 0);
+        }
+
+
+        // updates user address info
+        public function updateAddress($id, $value, $column) {
+            $this->db->query("UPDATE customers SET " . $column . " = :value WHERE customer_id=:userid;");
+            $this->db->bind(":value", $value);
+            $this->db->bind(":userid", $id);
+            $this->db->execute();
+        }
+
+
+        // gets user by id
+        public function getUser($id) {
+            $this->db->query("SELECT * FROM customers WHERE customer_id = :id");
+            $this->db->bind(":id", $id);
+
+            $user = $this->db->single();
+
+            return ($this->db->rowCount() > 0) ? $user : false;
         }
 }

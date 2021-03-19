@@ -76,7 +76,6 @@ class users extends Controller {
 
     public function login() {
         $data = $this->data;
-        $user = null;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -104,6 +103,15 @@ class users extends Controller {
                     $_SESSION["userid"] = $user->customer_id;
                     $_SESSION["username"] = $user->full_name;
                     $_SESSION["email"] = $user->email;
+                    $_SESSION["pwd"] = $user->customer_password;
+
+                    $_SESSION["address"] = $user->address;
+                    $_SESSION["city"] = $user->city;
+                    $_SESSION["state"] = $user->state;
+                    $_SESSION["zip"] = $user->zip;
+
+                    $_SESSION["phone"] = $user->phone;
+                    $_SESSION["payment"] = $user->payment;
 
                     header("location: /grocerystore");
                 }
@@ -124,27 +132,105 @@ class users extends Controller {
 
     public function account() {
         $data = $this->data;
+
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+          }
     
 
         $this->view('users/account', $data);
     }
 
 
+
+
     public function orders() {
         $data = $this->data;
+
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+          }
       
 
         $this->view('users/orders', $data);
     }
 
+
+
+
+
     public function addresses() {
         $data = $this->data;
+        $user = $this->userModel->getUser($_SESSION["userid"]);
+
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+          }
+
+
+          $data = [
+            'current_address' => $user->address,
+            'current_city' => $user->city,
+            'current_state' => $user->state,
+            'current_zip' => $user->zip,
+            'current_phone' => $user->phone,
+        ];
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+            $data = [
+                'userid' => $user->customer_id,
+                'current_address' => $user->address,
+                'current_city' => $user->city,
+                'current_state' => $user->state,
+                'current_zip' => $user->zip,
+                'current_phone' => $user->phone,
+
+                'new_address' => $_POST["new_address"],
+                'new_city' => $_POST["new_city"],
+                'new_state' => $_POST["new_state"],
+                'new_zip' => $_POST["new_zip"],
+                'new_phone' => $_POST["new_phone"]
+            ];
+            
+            if (!empty($_POST["new_address"])) {
+                $this->userModel->updateAddress($data["userid"], $data["new_address"], "address");
+            }
+
+            if (!empty($_POST["new_city"])) {
+                $this->userModel->updateAddress($data["userid"], $data["new_city"], "city");
+            }
+
+            if (!empty($_POST["new_state"])) {
+                $this->userModel->updateAddress($data["userid"], $data["new_state"], "state");
+            }
+
+            if (!empty($_POST["new_zip"])) {
+                $this->userModel->updateAddress($data["userid"], $data["new_zip"], "zip");
+            }
+
+            if (!empty($_POST["new_phone"])) {
+                $this->userModel->updateAddress($data["userid"], $data["new_phone"], "phone");
+            }
+
+            header("location: /grocerystore/users/addresses");
+        }
   
 
         $this->view('users/addresses', $data);
     }
 
+
+
+
     public function security() {
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+          }
+
+
         $data = [
             'name' => $_SESSION["username"],
             'email' => $_SESSION["email"],
@@ -185,5 +271,21 @@ class users extends Controller {
         unset($_SESSION["email"]);
 
         $this->view('users/logout', $data);
+    }
+
+
+
+    public function changeInfo() {
+        $data = $this->data;
+
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                "type" => $_GET["type"]
+            ];
+        }
+
+        $this->view('users/changeinfo', $data);
     }
 }

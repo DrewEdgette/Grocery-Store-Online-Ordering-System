@@ -7,140 +7,45 @@
 
 <div class="main-area">
 
-<div class="section-box">
-
 <div class="my-account"><h1>Your Addresses</h1></div>
 
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+<div class="section-box">
 
-  Address: <input type="text" name="address">
+<div class="my-account"><h1>Address</h1></div>
 
-<br>
+<form method="post" action="/grocerystore/users/addresses">
 
-  Street: <input type="text" name="street">
+  Address: <br> <?php echo $data["current_address"] ?>
 
-<br>
-
-  City: <input type="text" name="city">
+  <input type='text' name="new_address" placeholder="change address">
 
 <br>
 
-  State: <input type="text" name="state">
+  City: <br> <?php echo $data["current_city"] ?> 
+  <input type='text' name="new_city" placeholder='change city'>
 
 <br>
 
-  Zip Code: <input type="text" name="zip">
+  State: <br> <?php echo $data["current_state"] ?>
+  <input type='text' name="new_state" placeholder='change state'>
 
 <br>
 
-  Phone Number: <input type="text" name="phone">
+Zip: <br> <?php echo $data["current_zip"] ?>
+<input type='text' name="new_zip" placeholder='change zip'>
 
 <br>
 
-  Payment Method (e.g: Visa): <input type="text" size="45" maxlength="45" name="pay">
+  Phone: <br> <?php echo $data["current_phone"] ?>
+  <input type='text' name="new_phone" placeholder='change phone'>
 
-<br>
+  <input type='submit' value='Update Address Info'>
 
-  <input type="submit">
+
 
 </form>
 
 </div>
-
-
-<?php
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-  // collect value of input field
-
-  $address = $_POST['address'];
-
-  $street = $_POST['street'];
-
-  $city = $_POST['city'];
-
-  $state = $_POST['state'];
-
-  $zip = $_POST['zip'];
-
-  $phone = $_POST['phone'];
-
-  $pay = $_POST['pay'];
-
-  if (empty($address)) {
-
-    echo "Address field is blank";echo "<br>";
-
-  } else {
-
-    echo $address;echo "<br>";
-
-  }
-
-  if (empty($street)) {
-
-    echo "Street field is blank.";echo "<br>";
-
-  } else {
-
-    echo $street;echo "<br>";
-
-  }
-
-  if (empty($city)) {
-
-    echo "City field is blank.";echo "<br>";
-
-  } else {
-
-    echo $city;echo "<br>";
-
-  }
-
-  if (empty($state)) {
-
-    echo "State field is blank.";echo "<br>";
-
-  } else {
-
-    echo $state;echo "<br>";
-
-  }
-
-  if (empty($zip)) {
-
-    echo "Zip Code field is blank.";echo "<br>";
-
-  } else {
-
-    echo $zip;echo "<br>";
-
-  }
-
-  if (empty($phone)) {
-
-    echo "Phone number field is blank.";echo "<br>";
-
-  } else {
-
-    echo $phone;echo "<br>";
-
-  }
-
-  if (empty($pay)) {
-
-    echo "Payment method field is blank.";echo "<br>";
-
-  } else {
-
-    echo $pay;echo "<br>";
-
-  }
-
-}
-
-?>
 
 </div>
 
@@ -151,22 +56,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
-
-
-    <?php
-
-                $address = 'Enter Address';
-
-                $street = 'Enter Street';
-
-                $city = 'Enter City';
-
-                $state = 'Enter State';
-
-                $zip = 'Enter Zip Code';
-
-                $phone = 'Enter Phone Number';
-
-                $pay = 'Enter Payment Method (e.g: Visa #0123 4567 8901 2345)';
-
-    ?>
