@@ -2,3 +2,5 @@
 .env
 /config
 config.php
+/grocerystore/config
+!.htaccess
