@@ -11,28 +11,49 @@
 
 <div class="section-box">
 
-<?php
+<form method="post" action="/grocerystore/users/security">
 
-echo "<h2>Name</h2>";
-echo $_SESSION["username"];
-echo "<input type='text' name='name' placeholder='Change Name'>";
+  Name: <br> <?php echo $data["name"] ?>
 
+  <input type='text' name="new_name" placeholder="Change name">
 
-echo "<h2>Email</h2>";
-echo $_SESSION["email"];
-echo "<input type='text' name='email' placeholder='Change Email'>";
+<br>
 
-echo "<h2>Password</h2>";
-echo "......";
-echo "<input type='password' name='pwd' placeholder='Change Password'>";
+  Email: <br> <?php echo $data["email"] ?> 
+  <input type='text' name="new_email" placeholder='Change email'>
 
-?>
+<br>
 
-<input type="submit" name="submit" value="Update information">
+<input type='submit' value='Update information'>
+</form>
+
+<div class="error-field">
+
+    <?php
+    if (isset($_POST["error"])) {
+        switch ($_POST["error"]) {
+            case "emailtaken":
+                echo $data["emailtaken"];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    ?>
+    </div>
 
 </div>
-    
+
+<div class="section-box">
+  <h2><a href="/grocerystore/users/changepassword">Change password</a></h2>
 </div>
+
+<div class="section-box">
+  <h2><a href="/grocerystore/users/changepayment">Change payment info</a></h2>
+</div>
+
+</div>  
 
 
 <?php

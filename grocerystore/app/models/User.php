@@ -42,7 +42,7 @@
 
 
         // updates user address info
-        public function updateAddress($id, $value, $column) {
+        public function updateInfo($id, $value, $column) {
             $this->db->query("UPDATE customers SET " . $column . " = :value WHERE customer_id=:userid;");
             $this->db->bind(":value", $value);
             $this->db->bind(":userid", $id);
@@ -58,5 +58,23 @@
             $user = $this->db->single();
 
             return ($this->db->rowCount() > 0) ? $user : false;
+        }
+
+
+        // updates user password
+        public function updatePassword($user, $pwd, $new_pwd) {
+
+            $pwdHashed = $user->customer_password;
+
+            if (password_verify($pwd,$pwdHashed)) {
+                $this->db->query("UPDATE customers SET customer_password = :new_pwd WHERE customer_id=:userid;");
+                $this->db->bind(":new_pwd", $new_pwd);
+                $this->db->bind(":userid", $user->customer_id);
+                $this->db->execute();
+
+                return true;
+            }
+
+            return false;
         }
 }

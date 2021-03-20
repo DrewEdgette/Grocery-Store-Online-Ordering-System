@@ -16,31 +16,29 @@
 <form method="post" action="/grocerystore/users/addresses">
 
   Address: <br> <?php echo $data["current_address"] ?>
-
-  <input type='text' name="new_address" placeholder="change address">
+  <input type='text' name="new_address" placeholder="Change address">
 
 <br>
 
   City: <br> <?php echo $data["current_city"] ?> 
-  <input type='text' name="new_city" placeholder='change city'>
+  <input type='text' name="new_city" placeholder='Change city'>
 
 <br>
 
   State: <br> <?php echo $data["current_state"] ?>
-  <input type='text' name="new_state" placeholder='change state'>
+  <input type='text' name="new_state" placeholder='Change state'>
 
 <br>
 
-Zip: <br> <?php echo $data["current_zip"] ?>
-<input type='text' name="new_zip" placeholder='change zip'>
+  Zip: <br> <?php echo $data["current_zip"] ?>
+  <input type='text' name="new_zip" placeholder='Change zip'>
 
 <br>
 
   Phone: <br> <?php echo $data["current_phone"] ?>
-  <input type='text' name="new_phone" placeholder='change phone'>
+  <input type='text' name="new_phone" placeholder='Change phone'>
 
-  <input type='submit' value='Update Address Info'>
-
+  <input type='submit' value='Update address info'>
 
 
 </form>
