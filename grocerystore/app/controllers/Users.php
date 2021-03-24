@@ -144,7 +144,7 @@ class users extends Controller {
           }
       
         // sends data to the view
-        $this->view('users/orders', $data);
+        $this->view('users/orders/orders', $data);
     }
 
 
@@ -156,29 +156,69 @@ class users extends Controller {
             header("location: /grocerystore/users/login");
           }
 
-        $data = $this->data;
         $user = $this->userModel->getUser($_SESSION["userid"]);
 
-
-          $data = [
-            'current_address' => $user->address,
-            'current_city' => $user->city,
-            'current_state' => $user->state,
-            'current_zip' => $user->zip,
-            'current_phone' => $user->phone,
+        $data = [
+            "addresses" => [],
+            "noaddress" => ""
         ];
-        
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
+        $addressList = $this->userModel->getAddresses($user->customer_id);
+
+        if (empty($addressList[0]->address_id)) {
+            $_POST["error"] = "noaddress";
+            $data["noaddress"] = "You don't have any addresses yet.";
+        }
+        
+
+        foreach ($addressList as $address) {
+            array_push($data["addresses"], array(
+                $address->address_id,
+                $address->street_address, 
+                $address->city,
+                $address->state,
+                $address->zip,
+                $address->phone
+            ));
+        }   
+
+        // sends data to the view
+        $this->view('users/addresses/addresses', $data);
+    }
+
+
+
+     // displays the change address page
+     public function changeAddress() {
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+        }
+
+        $user = $this->userModel->getUser($_SESSION["userid"]);
+        $address = $this->userModel->getAddress($_GET["id"]);
+
+        if (!$this->userModel->isUserAddress($user->customer_id, $_GET["id"])) {
+            header("location: /grocerystore/users/addresses");
+        }
+
+        $data = [
+            'userid' => $user->customer_id,
+            'current_address' => $address->street_address,
+            'current_city' => $address->city,
+            'current_state' => $address->state,
+            'current_zip' => $address->zip,
+            'current_phone' => $address->phone,
+        ];
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $data = [
                 'userid' => $user->customer_id,
-                'current_address' => $user->address,
-                'current_city' => $user->city,
-                'current_state' => $user->state,
-                'current_zip' => $user->zip,
-                'current_phone' => $user->phone,
+                'current_address' => $address->street_address,
+                'current_city' => $address->city,
+                'current_state' => $address->state,
+                'current_zip' => $address->zip,
+                'current_phone' => $address->phone,
 
                 'new_address' => $_POST["new_address"],
                 'new_city' => $_POST["new_city"],
@@ -186,34 +226,110 @@ class users extends Controller {
                 'new_zip' => $_POST["new_zip"],
                 'new_phone' => $_POST["new_phone"]
             ];
+
             
             // check if input has been entered and update info for each field
             if (!empty($_POST["new_address"])) {
-                $this->userModel->updateInfo($data["userid"], $data["new_address"], "address");
+                $this->userModel->updateAddress($_GET["id"], "street_address", $data["new_address"]);
             }
 
             if (!empty($_POST["new_city"])) {
-                $this->userModel->updateInfo($data["userid"], $data["new_city"], "city");
+                $this->userModel->updateAddress($_GET["id"], "city", $data["new_city"]);
             }
 
             if (!empty($_POST["new_state"])) {
-                $this->userModel->updateInfo($data["userid"], $data["new_state"], "state");
+                $this->userModel->updateAddress($_GET["id"], "state", $data["new_state"]);
             }
 
             if (!empty($_POST["new_zip"])) {
-                $this->userModel->updateInfo($data["userid"], $data["new_zip"], "zip");
+                $this->userModel->updateAddress($_GET["id"], "zip", $data["new_zip"]);
             }
 
             if (!empty($_POST["new_phone"])) {
-                $this->userModel->updateInfo($data["userid"], $data["new_phone"], "phone");
+                $this->userModel->updateAddress($_GET["id"], "phone", $data["new_phone"]);
             }
 
-            
             header("location: /grocerystore/users/addresses");
         }
   
         // sends data to the view
-        $this->view('users/addresses', $data);
+        $this->view('users/addresses/changeaddress', $data);
+    }
+
+
+    // displays the delete address page
+    public function deleteAddress() {
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+        }
+
+        $user = $this->userModel->getUser($_SESSION["userid"]);
+        $address = $this->userModel->getAddress($_GET["id"]);
+
+        if (!$this->userModel->isUserAddress($user->customer_id, $_GET["id"])) {
+            header("location: /grocerystore/users/addresses");
+        }
+
+        $data = [
+            'userid' => $user->customer_id,
+            'current_address' => $address->street_address,
+            'current_city' => $address->city,
+            'current_state' => $address->state,
+            'current_zip' => $address->zip,
+            'current_phone' => $address->phone,
+        ];
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $data = [
+                'userid' => $user->customer_id,
+                'address_id' => $address->address_id,
+            ];
+
+
+            $this->userModel->deleteAddress($data["address_id"]);
+
+            header("location: /grocerystore/users/addresses");
+        }
+  
+        // sends data to the view
+        $this->view('users/addresses/deleteaddress', $data);
+    }
+
+
+
+    // displays the delete address page
+    public function addAddress() {
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+        }
+
+        $user = $this->userModel->getUser($_SESSION["userid"]);
+
+        $data = [
+            'userid' => $user->customer_id,
+        ];
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $data = [
+                'userid' => $user->customer_id,
+
+                'new_address' => $_POST["new_address"],
+                'new_city' => $_POST["new_city"],
+                'new_state' => $_POST["new_state"],
+                'new_zip' => $_POST["new_zip"],
+                'new_phone' => $_POST["new_phone"]
+            ];
+
+
+            $this->userModel->addAddress($data);
+
+            header("location: /grocerystore/users/addresses");
+        }
+  
+        // sends data to the view
+        $this->view('users/addresses/addaddress', $data);
     }
 
 
@@ -224,11 +340,9 @@ class users extends Controller {
             header("location: /grocerystore/users/login");
           }
 
-
-        $data = $this->data;
         $user = $this->userModel->getUser($_SESSION["userid"]);
 
-          $data = [
+        $data = [
             'name' => $user->full_name,
             'email' => $user->email,
 
@@ -252,7 +366,7 @@ class users extends Controller {
             
             // check if input has been entered and update info for each field
             if (!empty($_POST["new_name"])) {
-                $this->userModel->updateInfo($user->customer_id, $data["new_name"], "full_name");
+                $this->userModel->updateInfo($user->customer_id, "full_name", $data["new_name"]);
             }
 
             if (!empty($_POST["new_email"])) {
@@ -263,7 +377,7 @@ class users extends Controller {
                     $data["emailtaken"] = "The email is already registered.";
                 }
                 else {
-                    $this->userModel->updateInfo($user->customer_id, $data["new_email"], "email");
+                    $this->userModel->updateInfo($user->customer_id, "email", $data["new_email"]);
                 }
             }
 
@@ -278,7 +392,7 @@ class users extends Controller {
         $this->updateSessionInfo($user);
 
         // sends data to the view
-        $this->view('users/security', $data);
+        $this->view('users/security/security', $data);
     }
 
 
@@ -288,11 +402,9 @@ class users extends Controller {
             header("location: /grocerystore/users/login");
           }
 
-
-        $data = $this->data;
         $user = $this->userModel->getUser($_SESSION["userid"]);
 
-          $data = [
+        $data = [
             'pwdmatch' => '',
             'wrongpwd' => '',
             'success' => ''
@@ -341,7 +453,7 @@ class users extends Controller {
         }   
         
         // sends data to the view
-        $this->view('users/changepassword', $data);
+        $this->view('users/security/changepassword', $data);
     }
 
 
@@ -351,11 +463,9 @@ class users extends Controller {
             header("location: /grocerystore/users/login");
           }
 
-
-        $data = $this->data;
         $user = $this->userModel->getUser($_SESSION["userid"]);
 
-          $data = [
+        $data = [
             'payment' => '',
             'emptyinput' => ''
         ];
@@ -379,7 +489,7 @@ class users extends Controller {
             }
 
             else {
-                if ($this->userModel->updateInfo($user->customer_id, $data["payment"], "payment")) {
+                if ($this->userModel->updateInfo($user->customer_id, "payment", $data["payment"])) {
                     $_POST["error"] = "success";
                     $data["success"] = "Payment successfully updated.";
                 }
@@ -387,7 +497,106 @@ class users extends Controller {
         }
         
         // sends data to the view
-        $this->view('users/changepayment', $data);
+        $this->view('users/security/changepayment', $data);
+    }
+
+
+
+     // displays the change name page
+     public function changeName() {
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+          }
+
+        $user = $this->userModel->getUser($_SESSION["userid"]);
+
+        $data = [
+            'name' => $user->full_name,
+            'new_name' => '',
+            'emptyinput' => ''
+        ];
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+            $data = [
+                'name' => $user->full_name,
+                'new_name' => $_POST["new_name"],
+                'emptyinput' => ''
+            ];
+
+            $fields = array($data["new_name"]);
+
+
+            // check for input errors
+            if ($this->inputIsEmpty($fields)) {
+                $_POST["error"] = "emptyinput";
+                $data["emptyinput"] = "Please fill out all fields.";
+            }
+
+            else {
+                $this->userModel->updateInfo($user->customer_id, "full_name", $data["new_name"]);
+                header("location: /grocerystore/users/security");
+            }
+        }
+        
+        // sends data to the view
+        $this->view('users/security/changename', $data);
+    }
+
+
+    // displays the change email page
+    public function changeEmail() {
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/users/login");
+          }
+
+        $user = $this->userModel->getUser($_SESSION["userid"]);
+
+        $data = [
+            'email' => $user->email,
+            'new_email' => '',
+            'emptyinput' => '',
+            'emailtaken' => ''
+        ];
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+
+            $data = [
+                'email' => $user->email,
+                'new_email' => $_POST["new_email"],
+                'emptyinput' => '',
+                'emailtaken' => ''
+            ];
+
+            $fields = array($data["new_email"]);
+
+            if (empty($_POST["new_email"])) {
+                $_POST["error"] = "emptyinput";
+                $data["emptyinput"] = "Please fill out all fields.";
+            }
+
+            else {
+
+                // if that email is in the database, dont let the user choose it
+                if ($this->userModel->userExists($data["new_email"])) {
+                    $_POST["error"] = "emailtaken";
+                    $data["emailtaken"] = "The email is already registered.";
+                }
+           
+                else {
+                    $this->userModel->updateInfo($user->customer_id, "email", $data["new_email"]);
+                    header("location: /grocerystore/users/security");
+                }
+            }
+
+        }
+        
+        // sends data to the view
+        $this->view('users/security/changeemail', $data);
     }
 
 
@@ -427,7 +636,7 @@ class users extends Controller {
 
 
     // updates the current session variables
-    public  function updateSessionInfo($user) {
+    public function updateSessionInfo($user) {
         $_SESSION["userid"] = $user->customer_id;
         $_SESSION["username"] = $user->full_name;
         $_SESSION["email"] = $user->email;

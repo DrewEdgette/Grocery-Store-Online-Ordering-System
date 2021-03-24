@@ -41,11 +41,20 @@
         }
 
 
-        // updates user address info
-        public function updateInfo($id, $value, $column) {
-            $this->db->query("UPDATE customers SET " . $column . " = :value WHERE customer_id=:userid;");
+        // updates user info
+        public function updateInfo($id, $column, $value) {
+            $this->db->query("UPDATE customers SET " . $column . " = :value WHERE customer_id=:id;");
             $this->db->bind(":value", $value);
-            $this->db->bind(":userid", $id);
+            $this->db->bind(":id", $id);
+            $this->db->execute();
+        }
+
+
+        // updates address
+        public function updateAddress($id, $column, $value) {
+            $this->db->query("UPDATE addresses SET " . $column . " = :value WHERE address_id=:id;");
+            $this->db->bind(":value", $value);
+            $this->db->bind(":id", $id);
             $this->db->execute();
         }
 
@@ -76,5 +85,53 @@
             }
 
             return false;
+        }
+
+
+        // gets all user addresses by id
+        public function getAddresses($id) {
+            $this->db->query("SELECT * FROM addresses WHERE customer_id = :id;");
+            $this->db->bind(":id", $id);
+
+            return $this->db->resultSet();
+        }
+
+        // checks if address matches user id
+        public function isUserAddress($customerID, $addressID) {
+            $this->db->query("SELECT customer_id FROM addresses WHERE address_id = :addressID;");
+            $this->db->bind(":addressID", $addressID);
+            $result = $this->db->single();
+
+            return ($customerID === $result->customer_id);
+        }
+
+
+        // gets address by id
+        public function getAddress($id) {
+            $this->db->query("SELECT * FROM addresses WHERE address_id = :id;");
+            $this->db->bind(":id", $id);
+
+            return $this->db->single();
+        }
+
+
+        // deletes an address by id
+        public function deleteAddress($id) {
+            $this->db->query("DELETE FROM addresses WHERE address_id = :id;");
+            $this->db->bind(":id", $id);
+            $this->db->execute();
+        }
+
+        // adds an address to the database
+        public function addAddress($data) {
+            $this->db->query("INSERT INTO addresses (street_address,city,state,zip,phone,customer_id) 
+                              VALUES (:new_address, :new_city, :new_state, :new_zip, :new_phone, :userid);");
+            $this->db->bind(":new_address", $data["new_address"]);
+            $this->db->bind(":new_city", $data["new_city"]);
+            $this->db->bind(":new_state", $data["new_state"]);
+            $this->db->bind(":new_zip", $data["new_zip"]);
+            $this->db->bind(":new_phone", $data["new_phone"]);
+            $this->db->bind(":userid", $data["userid"]);
+            $this->db->execute();
         }
 }

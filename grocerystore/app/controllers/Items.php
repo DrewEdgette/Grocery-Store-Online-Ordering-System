@@ -5,7 +5,7 @@ class Items extends Controller {
     private $data = "";
 
     public function __construct() {
-        $this->userModel = $this->model('Item');
+        $this->itemModel = $this->model('Item');
     }
 
     public function search() {
@@ -19,7 +19,7 @@ class Items extends Controller {
                 "results" => ""
             ];
 
-            $results = $this->userModel->getSearchResults($data);
+            $results = $this->itemModel->getSearchResults($data);
 
 
             if (!$results) {
@@ -48,7 +48,7 @@ class Items extends Controller {
                 "item" => null
             ];
 
-            $data["item"] = $this->userModel->getItem($data["itemID"]);
+            $data["item"] = $this->itemModel->getItem($data["itemID"]);
         }
 
         $this->view('items/info', $data);

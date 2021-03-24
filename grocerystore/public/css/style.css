@@ -65,7 +65,6 @@ img {
 }
 
 
-
 .section-box input[type=text], input[type=password], select {
     width: 100%;
     padding: 12px 20px;
@@ -76,7 +75,7 @@ img {
     box-sizing: border-box;
   }
   
-  .section-box input[type=submit] {
+.section-box input[type=submit], .section-box button {
     width: 100%;
     background-color: #d8ecf7;
     padding: 14px 20px;
@@ -86,17 +85,22 @@ img {
     cursor: pointer;
   }
   
-  .section-box input[type=submit]:hover {
+.section-box input[type=submit]:hover, .section-box button:hover {
     background-color: #a7bfcc;
   }
 
-  .section-box a:link, .signin-signup a:visited{
+.section-box a:link, .section-box a:visited{
+    text-decoration: none;
+    color: #53b3e7;
+  }
+
+.section-box a:hover {
     text-decoration: none;
     color: purple;
   }
 
 .section-box p {
-    color: #555555
+    color: #555555;
 }
 
 .my-account {
@@ -129,8 +133,6 @@ img {
 .clickable-section-box p {
     color: #555555
 }
-
-
 
 .goto-signup {
     color: darkgray;
