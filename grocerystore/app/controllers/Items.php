@@ -28,7 +28,7 @@ class Items extends Controller {
 
             else {
                 foreach($results as $result) {
-                    $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/items/info?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> </div>";
+                    $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/items/info?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> $$result->item_price</div>";
                 }
             }
         }
