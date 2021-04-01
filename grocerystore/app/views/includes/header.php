@@ -17,24 +17,30 @@
 <div class="header">
 
         <a class="active" href="/grocerystore">Home</a>
+        <a class='active' href='/grocerystore/about'>About us</a>
 
         <?php 
             if (isset($_SESSION["userid"])) {
                 $fullName = $_SESSION["username"];
                 $nameArray = explode(' ',trim($fullName));
                 $firstName =  $nameArray[0];
-
+                
                 echo "<a class='active' href='/grocerystore/users/account'>Welcome, " . $firstName . "</a>";
+                echo "<a class='active' href='/grocerystore/carts/mycart'>Cart</a>";
+            
+                echo " <form action='/grocerystore/items/search' method='GET'>
+                <input type='text' name='query' type='submit' placeholder='Search here and press ENTER...'/>
+                </form>";
+
                 echo "<a class='active' href='/grocerystore/users/logout'>Logout</a>";
             }
 
             else {
-                echo "<a href='/grocerystore/users/login'>Sign in</a>";
+                echo "<a href='/grocerystore/customers/login'>Sign in</a>";
+                echo " <form action='/grocerystore/items/search' method='GET'>
+                <input type='text' name='query' type='submit' placeholder='Search here and press ENTER...'/>
+                </form>";
             }
         ?>
-
-        <form action="/grocerystore/items/search" method="GET">
-        <input type="text" name="query" type="submit" placeholder="Search here and press ENTER..."/>
-        </form>
 </div>
 

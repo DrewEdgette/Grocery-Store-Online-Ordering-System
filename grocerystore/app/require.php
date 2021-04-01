@@ -6,6 +6,7 @@
 
     require_once 'config/config.php';
     require_once 'helpers/session_helper.php';
+    require_once 'models/cart.php';
 
     //Instantiate core class
     $init = new Core();

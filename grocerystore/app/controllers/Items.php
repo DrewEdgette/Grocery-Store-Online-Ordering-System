@@ -40,6 +40,11 @@ class Items extends Controller {
     public function info() {
         $data = $this->data;
 
+        if (!isset($_SESSION["cart"])) {
+            $_SESSION["cart"] = [];
+        }
+
+
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
@@ -51,6 +56,27 @@ class Items extends Controller {
             $data["item"] = $this->itemModel->getItem($data["itemID"]);
         }
 
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            if (!isset($_SESSION["userid"])) {
+                header("location: /grocerystore/customers/login");
+              }
+
+            $data = [
+                "itemID" => $_GET["id"],
+                "success" => ""
+            ];
+
+            $data["item"] = $this->itemModel->getItem($data["itemID"]);
+
+            array_push($_SESSION["cart"], $data["item"]);
+
+            $_POST["error"] = "success";
+            $data["success"] = "Item added to cart.";
+
+        }
+
         $this->view('items/info', $data);
     }
+
 }

@@ -9,4 +9,14 @@ class Pages extends Controller {
 
         $this->view('index', $data);
     }
+
+
+    // loads the homepage view
+    public function us() {
+        $data = [
+            'title' => 'Home page'
+        ];
+
+        $this->view('us', $data);
+    }
 }
