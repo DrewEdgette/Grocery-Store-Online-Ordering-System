@@ -480,7 +480,7 @@ class Employees extends Controller {
         $_SESSION["username"] = $user->full_name;
         $_SESSION["email"] = $user->email;
         $_SESSION["pwd"] = $user->employee_password;
-        $_SESSION["isEmployee"] = True;
+        $_SESSION["isEmployee"] = true;
     }
 
 

@@ -11,22 +11,22 @@
 
   <div class="clickable-section-box" onclick="location.href='../employees/orders'">
     <h2>Fulfill an order</h2>
-    <p>Track orders or buy things again</p>
+    <p>View and fulfill customer orders</p>
   </div>
 
   <div class="clickable-section-box" onclick="location.href='../employees/inventory'">
-    <h2>Update low-stock items</h2>
-    <p>View and update email and password</p>
+    <h2>Update inventory</h2>
+    <p>View and update low-stock items</p>
   </div>
 
   <div class="clickable-section-box" onclick="location.href='../employees/additem'">
     <h2>Add item</h2>
-    <p>Add item to catalog</p>
+    <p>Add an item to the catalog</p>
   </div>
 
   <div class="clickable-section-box" onclick="location.href='../employees/security'">
     <h2>Your login info</h2>
-    <p>View and update email and password</p>
+    <p>Update name and password</p>
   </div>
 
 </div>

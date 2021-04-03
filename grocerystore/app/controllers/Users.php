@@ -17,7 +17,7 @@ class Users extends Controller {
             header("location: /grocerystore/customers/login");
           }
 
-        if (isset($_SESSION["isEmployee"])) {
+        if ($_SESSION["isEmployee"]) {
             $this->view('employees/account', $data);
         }
 

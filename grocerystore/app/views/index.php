@@ -13,7 +13,7 @@
 </section>
 
 
-<article class = "backgroundInfo">
+<article class = "FeaturedItems">
     <h1>Featured Items: </h1>
     <p><strong>Featured Items</strong> Coming Soon!</p>
 </article>

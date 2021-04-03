@@ -630,6 +630,7 @@ class Customers extends Controller {
         unset($_SESSION["userid"]);
         unset($_SESSION["username"]);
         unset($_SESSION["email"]);
+        unset($_SESSION["isEmployee"]);
 
         $this->view('customers/logout', $data);
     }
@@ -651,6 +652,7 @@ class Customers extends Controller {
         $_SESSION["payment"] = $user->payment;
 
         $_SESSION["cart"] = [];
+        $_SESSION["isEmployee"] = false;
     }
 
 
@@ -668,5 +670,6 @@ class Customers extends Controller {
 
         $_SESSION["phone"] = $user->phone;
         $_SESSION["payment"] = $user->payment;
+        $_SESSION["isEmployee"] = false;
     }
 }

@@ -1,13 +1,13 @@
 html{
     height: 100%;
     min-height: 100%;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 body {
     float: none;
     width: 90%;
     min-height: 100%;
-   /* font-family: 'Noto Sans', sans-serif;*/
     margin: auto;
     background-color: white;
 	-moz-box-shadow: rgba(31, 61, 31, 0.9) 20px 0px 25px,  rgba(31, 61, 31, 0.9) -20px 0px 25px;
@@ -19,13 +19,16 @@ h1, h2, h3 {
     margin: 0;
 }
 
-.backgroundInfo h1, h2{
+.backgroundInfo {
     float: none;
-    margin-top: auto;
-    font-family: "Times New Roman", Times, serif;
-    padding: 10px;
+    margin: 100px;
+    padding: 10px 80px;
     font-size: 15pt;
-    border: 0;
+    border: 4px double purple;
+    border-radius: 30px;
+}
+.backgroundInfo h1{
+    font-style: italic;
 }
 
 /*
@@ -208,4 +211,3 @@ footer {
     padding: 10px 0;
     margin: auto;
   }
-

@@ -26,7 +26,10 @@
                 $firstName =  $nameArray[0];
                 
                 echo "<a class='active' href='/grocerystore/users/account'>Welcome, " . $firstName . "</a>";
-                echo "<a class='active' href='/grocerystore/carts/mycart'>Cart</a>";
+
+                if (!$_SESSION["isEmployee"]) {
+                    echo "<a class='active' href='/grocerystore/carts/mycart'>Cart</a>";
+                }
             
                 echo " <form action='/grocerystore/items/search' method='GET'>
                 <input type='text' name='query' type='submit' placeholder='Search here and press ENTER...'/>

@@ -52,8 +52,11 @@
         <button onclick="document.location='register'">Create an account</button>
     </div>
 
-
-    <p><a href="/grocerystore/employees/login"> Employee Login </a></p>
+    
+    <div class="goto-signup">
+        <p>Employees</p>
+        <button onclick="document.location='/grocerystore/employees/login'">Employee Login</button>
+    </div>
 
     </div>
 
