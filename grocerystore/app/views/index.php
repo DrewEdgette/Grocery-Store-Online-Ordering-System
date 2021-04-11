@@ -15,49 +15,31 @@
 
 <article class = "FeaturedItems">
     <h1>Featured Items: </h1>
-</article>
 <?php
-$link = mysqli_connect("", "", "", "");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
- 
-// Attempt select query execution
-$sql = "SELECT * FROM items WHERE item_quantity > 0 ORDER BY RAND() LIMIT 5";
-if($result = mysqli_query($link, $sql)){
-    if(mysqli_num_rows($result) > 0){
-        while($row = mysqli_fetch_array($result)){
-	echo "<table>";
-            echo "<tr>";
+    echo "<table>";
+    foreach($data["featured_items"] as $item) {
+
+        echo "<tr>";
 		echo "<th>Item Name</th>";
-        echo "<img src='" . $row['image_url'] . "'>Image</img>";
+        echo "<th><img src='" . $item->image_url . "'></img></th>";
         echo "<th>Item Price</th>";
 		echo "<th>Item Weight</th>";
         echo "</tr>";
+        
         echo "<tr>";
-		echo "<td>" . $row['item_name'] . "</td>";
-        echo "<td>" . $row['item_price'] . "</td>";
-		echo "<td>" . $row['item_weight'] . "</td>";
+		echo "<td>" . $item->item_name . "</td>";
+        echo "<td>" . $item->item_price . "</td>";
+		echo "<td>" . $item->item_weight . "</td>";
         echo "</tr>";
-        }
-        echo "</table>";
-        // Free result set
-        mysqli_free_result($result);
-    } else{
-        echo "No records matching your query were found.";
     }
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-}
- 
-// Close connection
-mysqli_close($link);
+
+    echo "</table>";
 ?>
 
-    <?php
+</article>
+
+<?php
     require APPROOT . "/views/includes/footer.php";
-    ?>
+?>
 
  </body>

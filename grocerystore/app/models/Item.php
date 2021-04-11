@@ -28,5 +28,12 @@
             return $this->db->single();
         }
 
+         // gets item by id
+         public function getFeaturedItems() {
+            $this->db->query("SELECT * FROM items WHERE item_quantity > 0 ORDER BY RAND() LIMIT 5;");
+
+            return $this->db->resultSet();
+        }
+
 
 }

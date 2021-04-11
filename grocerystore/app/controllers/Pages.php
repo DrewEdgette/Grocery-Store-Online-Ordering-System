@@ -1,5 +1,8 @@
 <?php
 class Pages extends Controller {
+    public function __construct() {
+        $this->itemModel = $this->model('Item');
+    }
 
     // loads the homepage view
     public function index() {
@@ -7,16 +10,9 @@ class Pages extends Controller {
             'title' => 'Home page'
         ];
 
+        $data["featured_items"] = $this->itemModel->getFeaturedItems();
+
         $this->view('index', $data);
     }
 
-
-    // loads the homepage view
-    public function us() {
-        $data = [
-            'title' => 'Home page'
-        ];
-
-        $this->view('us', $data);
-    }
 }
