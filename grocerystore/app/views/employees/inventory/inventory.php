@@ -9,6 +9,10 @@
 
 <div class="main-area">
 
+<?php
+    echo $data["results"];
+?>
+
 </div>
 
 

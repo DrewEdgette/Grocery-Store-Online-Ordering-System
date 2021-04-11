@@ -14,6 +14,11 @@
             return $this->db->resultSet();
         }
 
+        public function getLowStockItems() {
+            $this->db->query("SELECT * FROM items WHERE item_quantity < 6 ORDER BY item_quantity ASC;");
+            return $this->db->resultSet();
+        }
+
 
         // gets item by id
         public function getItem($id) {

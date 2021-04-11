@@ -31,17 +31,10 @@ h1, h2, h3 {
     font-style: italic;
 }
 
-/*
-body aside{
-    float: right;
-    max-width: 30%;
-    margin-right: 20px;
-}*/
 
 .image img {
     float: left;
-    margin-top: auto;
-    padding: 10px;
+    margin: 20px;
     display: block;
     width: 50%;
     height: 20%;
@@ -170,6 +163,12 @@ body aside{
 
 .clickable-section-box p {
     color: #555555
+}
+
+.clickable-section-box img {
+    margin: 20px auto;
+    display: block;
+    
 }
 
 .goto-signup {

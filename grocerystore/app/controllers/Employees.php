@@ -7,6 +7,7 @@ class Employees extends Controller {
 
     public function __construct() {
         $this->userModel = $this->model('Employee');
+        $this->itemModel = $this->model('Item');
     }
 
     // displays the employee account creation page
@@ -141,13 +142,33 @@ class Employees extends Controller {
     }
 
 
-
     public function inventory() {
         $data = $this->data;
-
-        if (!isset($_SESSION["userid"])) {
+    
+        if (!$_SESSION["isEmployee"]) {
             header("location: /grocerystore/employees/login");
-          }
+        }
+    
+        $data = [
+            "results" => ""
+        ];
+    
+        $results = $this->itemModel->getLowStockItems($data);
+    
+    
+        if (!$results) {
+            $data["results"] = "<div class='my-account'><h1>No results found.</h1></div>";
+        }
+    
+        else {
+            foreach($results as $result) {
+    
+                // if the item quantity is zero, just say it's out of stock
+                $quantity = (!$result->item_quantity) ? "Out of stock" : "Quantity: " . $result->item_quantity;
+    
+                $data["results"] .= "<div class='clickable-section-box'>" . $result->item_name . " <img src='" . $result->image_url . "'>$quantity</div>";
+            }
+        }
       
         // sends data to the view
         $this->view('employees/inventory/inventory', $data);
@@ -384,34 +405,19 @@ class Employees extends Controller {
 
 
     // displays the add item page
+public function additem() {
 
-    public function additem() {
+        if (!$_SESSION["isEmployee"]) {
+            header("location: /grocerystore");
+        }
 
         $data = $this->data;
 
-
-        $data = [
-
-            'item_name' => '',
-
-            'item_price' => '',
-
-            'item_weight' => '',
-
-            'image_url' => ''
-
-            ];
-
-       
-
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-
             $data = [
-
-            'item_name' => $_POST["item_name"],
+                'item_name' => $_POST["item_name"],
 
             'item_price' => $_POST["item_price"],
 
@@ -421,19 +427,30 @@ class Employees extends Controller {
 
             ];
 
+            $userInfo = array($data["item_name"],$data["item_price"],$data["item_weight"],$data["image_url"]);
 
+            if ($this->inputIsEmpty($userInfo)) {
+                $_POST["error"] = "emptyinput";
+                $data["emptyinput"] = "Please fill out all fields.";
+            }
 
-        $userInfo = array($data["item_name"],$data["item_price"],$data["item_weight"],$data["image_url"]);
+            if (empty($data["emptyinput"])) {
+                if ($this->userModel->additem($data)) {
+                    header("location: /grocerystore/employees/additem");
+                }
 
-
-
-        header("location: /grocerystore/employees/additem");
+                else {
+                    die("Something went wrong.");
+                }
+    
+            }
 
         }
 
+        // sends data to the view
         $this->view('employees/additem', $data);
+    }
 
-}
 
 
 

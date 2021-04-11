@@ -28,6 +28,21 @@
             <input type="submit" name="submit" value="Add Item">
 
         </form>
+  <div class="error-field">
+
+    <?php
+    if (isset($_POST["error"])) {
+        switch ($_POST["error"]) {
+            case "emptyinput":
+                echo $data["emptyinput"];
+                break;
+
+            default:
+                break;
+        }
+    }
+    ?>
+    </div>
 </div>
 
 <?php

@@ -18,6 +18,16 @@ class Employee {
         return ($this->db->execute()) ? true : false;
     }  
 
+    // adds a grocery item to the database
+    public function additem($data) {
+    $this->db->query("INSERT INTO items (item_name, item_price, item_weight, image_url) VALUES (:item_name,:item_price,:item_weight,:image_url); DELETE FROM items WHERE item_price = 0.00;");
+    $this->db->bind(":item_name", $data["item_name"]);
+    $this->db->bind(":item_price", $data["item_price"]);
+    $this->db->bind(":item_weight", $data["item_weight"]);
+    $this->db->bind(":image_url", $data["image_url"]);
+
+    return ($this->db->execute());
+    }
 
     // logs the user in and returns the row if successful
     public function login($email,$pwd) {
