@@ -28,11 +28,24 @@
             return $this->db->single();
         }
 
-         // gets item by id
+         // gets featured items
          public function getFeaturedItems() {
             $this->db->query("SELECT * FROM items WHERE item_quantity > 0 ORDER BY RAND() LIMIT 5;");
 
             return $this->db->resultSet();
+        }
+
+        // sets an item's quantity
+        public function setQuantity($data) {
+            if (!($data["new_quantity"] == Null)) {
+                $this->db->query("UPDATE items SET item_quantity = :quantity WHERE item_id = :id;");
+                $this->db->bind(":quantity", $data["new_quantity"]);
+                $this->db->bind(":id", $data["itemID"]);
+            
+                return $this->db->execute();
+            }
+
+            return false;
         }
 
 

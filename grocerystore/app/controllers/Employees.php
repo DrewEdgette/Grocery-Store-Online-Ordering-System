@@ -14,7 +14,7 @@ class Employees extends Controller {
     public function register() {
 
         if (!$_SESSION["isEmployee"]) {
-            header("location: /grocerystore");
+            header("location: /grocerystore/employees/login");
         }
 
         $data = $this->data;
@@ -133,9 +133,9 @@ class Employees extends Controller {
     public function orders() {
         $data = $this->data;
 
-        if (!isset($_SESSION["userid"])) {
+        if (!$_SESSION["isEmployee"]) {
             header("location: /grocerystore/employees/login");
-          }
+        }
       
         // sends data to the view
         $this->view('employees/orders/orders', $data);
@@ -165,8 +165,7 @@ class Employees extends Controller {
     
                 // if the item quantity is zero, just say it's out of stock
                 $quantity = (!$result->item_quantity) ? "Out of stock" : "Quantity: " . $result->item_quantity;
-    
-                $data["results"] .= "<div class='clickable-section-box'>" . $result->item_name . " <img src='" . $result->image_url . "'>$quantity</div>";
+                $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/employees/updateitem?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> $quantity</div>";
             }
         }
       
@@ -175,13 +174,57 @@ class Employees extends Controller {
     }
 
 
+    public function updateitem() {
+        $data = $this->data;
+
+        if (!$_SESSION["isEmployee"]) {
+            header("location: /grocerystore/employees/login");
+        }
+
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
+
+            $data = [
+                "itemID" => $_GET["id"],
+                "item" => null
+            ];
+
+            $data["item"] = $this->itemModel->getItem($data["itemID"]);
+        }
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            $data = [
+                "itemID" => $_GET["id"],
+                "success" => "",
+                "new_quantity" => $_POST["new_quantity"]
+            ];
+
+            $data["item"] = $this->itemModel->getItem($data["itemID"]);
+
+            if ($this->itemModel->setQuantity($data)) {
+                $_POST["error"] = "success";
+                $data["success"] = "Quantity updated.";
+            }
+
+            else {
+                $_POST["error"] = "failure";
+                $data["failure"] = "Something went wrong";
+            }
+
+        }
+
+        $this->view('employees/inventory/updateitem', $data);
+    }
+
+
 
 
     // displays the security page
     public function security() {
-        if (!isset($_SESSION["userid"])) {
+        if (!$_SESSION["isEmployee"]) {
             header("location: /grocerystore/employees/login");
-          }
+        }
 
         $user = $this->userModel->getUser($_SESSION["userid"]);
 
