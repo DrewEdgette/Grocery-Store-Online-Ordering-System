@@ -28,7 +28,16 @@ class Items extends Controller {
 
             else {
                 foreach($results as $result) {
-                    $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/items/info?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> $$result->item_price</div>";
+                    // if user is not logged in or logged in as a customer, show search results that link them to the item's page
+                    if (!isset($_SESSION["isEmployee"]) || !$_SESSION["isEmployee"]) {
+                        $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/items/info?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> $$result->item_price</div>";
+                    }
+
+                    // otherwise link them to the employee update item page
+                    else {
+                        $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/employees/changeitem?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> $$result->item_price</div>";
+                    }
+                    
                 }
             }
         }

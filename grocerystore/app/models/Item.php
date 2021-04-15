@@ -35,18 +35,13 @@
             return $this->db->resultSet();
         }
 
-        // sets an item's quantity
-        public function setQuantity($data) {
-            if (!($data["new_quantity"] == Null)) {
-                $this->db->query("UPDATE items SET item_quantity = :quantity WHERE item_id = :id;");
-                $this->db->bind(":quantity", $data["new_quantity"]);
-                $this->db->bind(":id", $data["itemID"]);
-            
-                return $this->db->execute();
-            }
-
-            return false;
+        // updates an item's values
+        public function updateItem($id, $column, $value) {
+            $this->db->query("UPDATE items SET " . $column . " = :value WHERE item_id = :id;");
+            $this->db->bind(":value", $value);
+            $this->db->bind(":id", $id);
+        
+            return $this->db->execute();
         }
-
 
 }

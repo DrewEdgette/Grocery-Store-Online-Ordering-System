@@ -165,7 +165,7 @@ class Employees extends Controller {
     
                 // if the item quantity is zero, just say it's out of stock
                 $quantity = (!$result->item_quantity) ? "Out of stock" : "Quantity: " . $result->item_quantity;
-                $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/employees/updateitem?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> $quantity</div>";
+                $data["results"] .= "<div class='clickable-section-box' onclick=location.href='/grocerystore/employees/changeitem?id=" . $result->item_id . "'>" . $result->item_name . " <img src='" . $result->image_url . "'> $quantity</div>";
             }
         }
       
@@ -174,7 +174,7 @@ class Employees extends Controller {
     }
 
 
-    public function updateitem() {
+    public function changeitem() {
         $data = $this->data;
 
         if (!$_SESSION["isEmployee"]) {
@@ -197,24 +197,34 @@ class Employees extends Controller {
             $data = [
                 "itemID" => $_GET["id"],
                 "success" => "",
+
+                "new_name" => $_POST["new_name"],
+                "new_price" => $_POST["new_price"],
                 "new_quantity" => $_POST["new_quantity"]
             ];
 
             $data["item"] = $this->itemModel->getItem($data["itemID"]);
 
-            if ($this->itemModel->setQuantity($data)) {
-                $_POST["error"] = "success";
-                $data["success"] = "Quantity updated.";
+
+             // check if input has been entered and update info for each field
+             if (!empty($_POST["new_name"])) {
+                $this->itemModel->updateItem($_GET["id"], "item_name", $data["new_name"]);
             }
 
-            else {
-                $_POST["error"] = "failure";
-                $data["failure"] = "Something went wrong";
+            if (!empty($_POST["new_price"])) {
+                $this->itemModel->updateItem($_GET["id"], "item_price", $data["new_price"]);
             }
+
+            if (!empty($_POST["new_quantity"])) {
+                $this->itemModel->updateItem($_GET["id"], "item_quantity", $data["new_quantity"]);
+            }
+
+            header("location: /grocerystore/employees/changeitem?id=" . $_GET["id"]);
+
 
         }
 
-        $this->view('employees/inventory/updateitem', $data);
+        $this->view('employees/inventory/changeitem', $data);
     }
 
 

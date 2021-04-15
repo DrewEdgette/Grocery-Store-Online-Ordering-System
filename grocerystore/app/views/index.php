@@ -29,7 +29,6 @@
         echo "<tr>";
 		echo "<td>" . $item->item_name . "</td>";
         echo "<td>" . $item->item_price . "</td>";
-		echo "<td>" . $item->item_weight . "</td>";
         echo "</tr>";
     }
 

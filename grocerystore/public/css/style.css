@@ -33,12 +33,17 @@ h1, h2, h3 {
 
 
 .image img {
-    float: left;
+    float: none;
     margin: 20px;
     display: block;
     width: 50%;
     height: 20%;
     
+}
+
+.FeaturedItems{
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .header {
