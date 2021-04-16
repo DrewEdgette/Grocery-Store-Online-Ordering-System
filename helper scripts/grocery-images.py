@@ -2,10 +2,13 @@ import requests
 from bs4 import BeautifulSoup
 import mysql.connector as mysqlc
 
+# This script takes item names and webscrapes google for a corresponding image url 
+# which then gets put into the items table in the database.
+
 # creates database connection
 db = mysqlc.connect(
     host="",
-    user="admin",
+    user="",
     password="",
     database=""
     )
