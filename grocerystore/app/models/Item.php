@@ -44,4 +44,13 @@
             return $this->db->execute();
         }
 
+
+        // gets specific order by its id
+        public function getItemList($orderID) {
+            $this->db->query("SELECT * FROM order_details INNER JOIN items ON items.item_id = order_details.item_id HAVING order_id = :order_id;");
+            $this->db->bind(":order_id", $orderID);
+
+            return $this->db->resultSet();
+        }
+
 }

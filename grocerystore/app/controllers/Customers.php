@@ -7,6 +7,7 @@ class Customers extends Controller {
 
     public function __construct() {
         $this->userModel = $this->model('Customer');
+        $this->itemModel = $this->model('Item');
     }
 
 
@@ -140,10 +141,47 @@ class Customers extends Controller {
 
         if (!isset($_SESSION["userid"])) {
             header("location: /grocerystore/customers/login");
-          }
+        }
+
+        $user = $this->userModel->getUser($_SESSION["userid"]);
+
+        $data = [
+            "orders" => [],
+        ];
+
+        $data["orders"] = $this->userModel->getOrders($_SESSION["userid"]);
+
+        $this->updateSessionInfo($user);
+
       
         // sends data to the view
         $this->view('customers/orders/orders', $data);
+    }
+
+
+    public function vieworder() {
+        $data = $this->data;
+
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/customers/login");
+        }
+
+        $user = $this->userModel->getUser($_SESSION["userid"]);
+        $order = $this->userModel->getOrder($user->customer_id, $_GET["id"]);
+
+        $itemList = $this->itemModel->getItemList($_GET["id"]);
+
+        $data = [
+            "order" => [],
+            "itemList" => []
+        ];
+
+        $data["order"] = $order;
+        $data["itemList"] = $itemList;
+
+      
+        // sends data to the view
+        $this->view('customers/orders/vieworder', $data);
     }
 
 
@@ -194,11 +232,8 @@ class Customers extends Controller {
         }
 
         $user = $this->userModel->getUser($_SESSION["userid"]);
-        $address = $this->userModel->getAddress($_GET["id"]);
+        $address = $this->userModel->getAddress($_SESSION["userid"], $_GET["id"]);
 
-        if (!$this->userModel->isUserAddress($user->customer_id, $_GET["id"])) {
-            header("location: /grocerystore/customers/addresses");
-        }
 
         $data = [
             'userid' => $user->customer_id,
@@ -263,11 +298,8 @@ class Customers extends Controller {
         }
 
         $user = $this->userModel->getUser($_SESSION["userid"]);
-        $address = $this->userModel->getAddress($_GET["id"]);
+        $address = $this->userModel->getAddress($_SESSION["userid"], $_GET["id"]);
 
-        if (!$this->userModel->isUserAddress($user->customer_id, $_GET["id"])) {
-            header("location: /grocerystore/customers/addresses");
-        }
 
         $data = [
             'userid' => $user->customer_id,

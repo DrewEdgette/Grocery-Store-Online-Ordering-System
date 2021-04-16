@@ -91,5 +91,11 @@ class Employee {
         return false;
     }
 
+    // gets the latest orders from all customers
+    public function getOrders() {
+        $this->db->query("SELECT * FROM orders WHERE order_status = 'Pending' ORDER BY order_id DESC;");
+        return $this->db->resultSet();
+    }
+
 
 }

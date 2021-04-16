@@ -136,6 +136,12 @@ class Employees extends Controller {
         if (!$_SESSION["isEmployee"]) {
             header("location: /grocerystore/employees/login");
         }
+
+        $data = [
+            "orders" => [],
+        ];
+
+        $data["orders"] = $this->userModel->getOrders();
       
         // sends data to the view
         $this->view('employees/orders/orders', $data);

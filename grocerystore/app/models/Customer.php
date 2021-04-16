@@ -64,22 +64,15 @@ class Customer {
         return $this->db->resultSet();
     }
 
-    // checks if address matches user id
-    public function isUserAddress($customerID, $addressID) {
-        $this->db->query("SELECT customer_id FROM addresses WHERE address_id = :addressID;");
-        $this->db->bind(":addressID", $addressID);
-        $result = $this->db->single();
-
-        return ($customerID === $result->customer_id);
-    }
-
 
     // gets address by id
-    public function getAddress($id) {
-        $this->db->query("SELECT * FROM addresses WHERE address_id = :id;");
-        $this->db->bind(":id", $id);
+    public function getAddress($customerID, $addressID) {
+        $this->db->query("SELECT * FROM addresses WHERE address_id = :addressID;");
+        $this->db->bind(":addressID", $addressID);
 
-        return $this->db->single();
+        $result = $this->db->single();
+
+        return ($customerID === $result->customer_id) ? $result : header("location: /grocerystore/customers/addresses");
     }
 
 
@@ -150,4 +143,25 @@ class Customer {
         $this->db->bind(":email", $email);
         return $this->db->rowCount() > 0;
     }
+
+
+    // gets all of a user's orders by id
+    public function getOrders($id) {
+        $this->db->query("SELECT * FROM orders WHERE customer_id = :customer_id;");
+        $this->db->bind(":customer_id", $id);
+
+        return $this->db->resultSet();
+    }
+
+    // gets specific order by its id
+    public function getOrder($customerID, $orderID) {
+        $this->db->query("SELECT * FROM orders WHERE order_id = :order_id;");
+        $this->db->bind(":order_id", $orderID);
+
+        $order = $this->db->single();
+        $resultCustomer = $order->customer_id;
+
+        return ($customerID == $resultCustomer) ? $order : header("location: /grocerystore/customers/orders");
+    }
+
 }
