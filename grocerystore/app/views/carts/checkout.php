@@ -16,16 +16,17 @@
 <?php
 
     foreach ($_SESSION["cart"] as $item) {
-        echo "<p>" . $item->item_name . "</p>";
-        echo "<img src='" . $item->image_url . "'></img>";
-        echo "<p>$" . $item->item_price . "</p>";
+        echo "<p>" . $item[0]->item_name . "</p>";
+        echo "<img src='" . $item[0]->image_url . "'></img>";
+        echo "<p>$" . $item[0]->item_price * $item[1] . "</p>";
+        echo "<p>Quantity: " . $item[1] . "</p>";
     }
     
 
 
     echo "Sub-total: $" . $data["subtotal"] . "<br>";
     echo "Tax: $" . $data["tax"] . "<br>";
-    echo "Total: $" . $data["total"] . "<br>";
+    echo "<h2>Total: $" . $data["total"] . "</h2><br>";
 ?>
 
 <input type="submit" name="submit" value="Place order">

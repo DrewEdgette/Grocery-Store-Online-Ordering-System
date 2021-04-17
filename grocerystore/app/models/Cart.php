@@ -12,7 +12,7 @@ class Cart {
         $subTotal = 0.00;
 
         foreach ($cart as $item) {
-            $subTotal += $item->item_price;
+            $subTotal += $item[0]->item_price * $item[1];
         }
 
         return $subTotal;
@@ -47,14 +47,19 @@ class Cart {
         // populate order_details with all of the items that were in the cart
         foreach ($data["cart"] as $item) {
             $this->db->query("INSERT INTO order_details (item_id, item_quantity, item_price, order_id) VALUES (:item_id, :item_quantity, :item_price, :order_id);");
-            $this->db->bind(":item_id", $item->item_id);
-            $this->db->bind(":item_quantity", "1");
-            $this->db->bind(":item_price", $item->item_price);
+            $this->db->bind(":item_id", $item[0]->item_id);
+            $this->db->bind(":item_quantity", $item[1]);
+            $this->db->bind(":item_price", $item[0]->item_price);
             $this->db->bind(":order_id", $orderID);
 
             $this->db->execute();
         }
         
+    }
+
+
+    public function setItemQuantity($item, $quantity) {
+
     }
     
 }

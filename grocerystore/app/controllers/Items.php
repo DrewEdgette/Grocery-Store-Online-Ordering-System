@@ -78,7 +78,14 @@ class Items extends Controller {
 
             $data["item"] = $this->itemModel->getItem($data["itemID"]);
 
-            array_push($_SESSION["cart"], $data["item"]);
+            if (!isset($_SESSION["cart"][$_GET["id"]])) {
+                $_SESSION["cart"][$_GET["id"]][0] = $data["item"];
+                $_SESSION["cart"][$_GET["id"]][1] = 1;
+            }
+
+            else {
+                $_SESSION["cart"][$_GET["id"]][1]++;
+            }
 
             $_POST["error"] = "success";
             $data["success"] = "Item added to cart.";

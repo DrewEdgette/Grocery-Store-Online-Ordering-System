@@ -17,10 +17,22 @@
       else {
 
         foreach ($_SESSION["cart"] as $item) {
+          echo "<form action='/grocerystore/carts/mycart' method='post'>";
           echo "<div class='section-box'>";
-          echo "<p>" . $item->item_name . "</p>";
-          echo "<img src='" . $item->image_url . "'></img>";
-          echo "<p>$" . $item->item_price . "</p>";
+          echo "<p>" . $item[0]->item_name . "</p>";
+          echo "<img src='" . $item[0]->image_url . "'></img>";
+          echo "<p>$" . $item[0]->item_price *  $item[1]. "</p>";
+          echo "<p> Quantity: " . $item[1] . "</p>";
+          echo "<select name='quantity'>";
+          echo "<option value='none' selected disabled hidden>" . $item[1] ."</option>";
+
+          for ($i=1; $i<11; $i++) {
+            echo "<option>" . $i . "</option>";
+          }
+
+          echo "</select>";
+          echo "<input type='submit' name='" . $item[0]->item_id . "' value='Change quantity'>";
+          echo "</form>";
           echo "</div>";
         }
 

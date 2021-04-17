@@ -93,9 +93,17 @@ class Employee {
 
     // gets the latest orders from all customers
     public function getOrders() {
-        $this->db->query("SELECT * FROM orders WHERE order_status = 'Pending' ORDER BY order_id DESC;");
+        $this->db->query("SELECT * FROM orders WHERE order_status = 'Pending' ORDER BY order_id ASC;");
         return $this->db->resultSet();
     }
 
+
+    // gets specific order by its id
+    public function getOrder($orderID) {
+        $this->db->query("SELECT * FROM orders WHERE order_id = :order_id;");
+        $this->db->bind(":order_id", $orderID);
+
+        return $this->db->single();
+    }
 
 }

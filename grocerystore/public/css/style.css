@@ -170,6 +170,13 @@ h1, h2, h3 {
     color: #555555
 }
 
+
+.clickable-section-box a {
+    text-decoration: none;
+}
+
+
+
 .clickable-section-box img {
     margin: 20px auto;
     display: block;

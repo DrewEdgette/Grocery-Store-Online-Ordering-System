@@ -151,8 +151,6 @@ class Customers extends Controller {
 
         $data["orders"] = $this->userModel->getOrders($_SESSION["userid"]);
 
-        $this->updateSessionInfo($user);
-
       
         // sends data to the view
         $this->view('customers/orders/orders', $data);

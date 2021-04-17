@@ -147,7 +147,7 @@ class Customer {
 
     // gets all of a user's orders by id
     public function getOrders($id) {
-        $this->db->query("SELECT * FROM orders WHERE customer_id = :customer_id;");
+        $this->db->query("SELECT * FROM orders WHERE customer_id = :customer_id ORDER BY order_id DESC;");
         $this->db->bind(":customer_id", $id);
 
         return $this->db->resultSet();
@@ -159,9 +159,9 @@ class Customer {
         $this->db->bind(":order_id", $orderID);
 
         $order = $this->db->single();
-        $resultCustomer = $order->customer_id;
+        $resultCustomerID = $order->customer_id;
 
-        return ($customerID == $resultCustomer) ? $order : header("location: /grocerystore/customers/orders");
+        return ($customerID == $resultCustomerID) ? $order : header("location: /grocerystore/customers/orders");
     }
 
 }

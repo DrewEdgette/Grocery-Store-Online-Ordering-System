@@ -20,6 +20,26 @@ class Carts extends Controller {
         ];
 
 
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (!isset($_SESSION["userid"])) {
+                header("location: /grocerystore/customers/login");
+            }
+
+            $data = [
+                "cart" => $_SESSION["cart"],
+            ];
+
+            $newQuantity = $_POST["quantity"];
+            $itemID = array_key_last($_POST);
+
+            $_SESSION["cart"][$itemID][1] = $newQuantity;
+
+            //echo $data["cart"][$itemID][1];
+
+            header("location: /grocerystore/carts/mycart");
+        }
+
+
         // sends data to the view
         $this->view('carts/mycart', $data);
     }
@@ -28,6 +48,8 @@ class Carts extends Controller {
         if (!isset($_SESSION["userid"])) {
             header("location: /grocerystore/customers/login");
         }
+
+        $user = $this->userModel->getUser($_SESSION["userid"]);
         
         
         $data = [
@@ -51,11 +73,47 @@ class Carts extends Controller {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $this->cartModel->placeOrder($data);
             
+            $this->updateSessionInfo($user);
             header("location: /grocerystore/customers/orders");
         }
 
         // sends data to the view
         $this->view('carts/checkout', $data);
+    }
+
+
+    public function changeQuantity() {
+        if (!isset($_SESSION["userid"])) {
+            header("location: /grocerystore/customers/login");
+        }
+
+        $data = [
+            "cart" => $_SESSION["cart"],
+        ];
+
+
+        // sends data to the view
+        $this->view('carts/changequantity', $data);
+    }
+
+
+    // updates the current session variables
+    public function updateSessionInfo($user) {
+        $_SESSION["userid"] = $user->customer_id;
+        $_SESSION["username"] = $user->full_name;
+        $_SESSION["email"] = $user->email;
+        $_SESSION["pwd"] = $user->customer_password;
+
+        $_SESSION["address"] = $user->address;
+        $_SESSION["city"] = $user->city;
+        $_SESSION["state"] = $user->state;
+        $_SESSION["zip"] = $user->zip;
+
+        $_SESSION["phone"] = $user->phone;
+        $_SESSION["payment"] = $user->payment;
+
+        $_SESSION["cart"] = [];
+        $_SESSION["isEmployee"] = false;
     }
 
 }

@@ -148,6 +148,31 @@ class Employees extends Controller {
     }
 
 
+    public function viewOrder() {
+        $data = $this->data;
+
+        if (!$_SESSION["isEmployee"]) {
+            header("location: /grocerystore/employees/login");
+        }
+
+        $order = $this->userModel->getOrder($_GET["id"]);
+
+        $itemList = $this->itemModel->getItemList($_GET["id"]);
+
+        $data = [
+            "order" => [],
+            "itemList" => []
+        ];
+
+        $data["order"] = $order;
+        $data["itemList"] = $itemList;
+
+      
+        // sends data to the view
+        $this->view('employees/orders/vieworder', $data);
+    }
+
+
     public function inventory() {
         $data = $this->data;
     
