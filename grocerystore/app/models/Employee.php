@@ -102,8 +102,15 @@ class Employee {
     public function getOrder($orderID) {
         $this->db->query("SELECT * FROM orders WHERE order_id = :order_id;");
         $this->db->bind(":order_id", $orderID);
-
         return $this->db->single();
+    }
+
+    
+    public function setOrderStatus($orderID, $status) {
+        $this->db->query("UPDATE orders SET order_status = :order_status WHERE order_id = :order_id;");
+        $this->db->bind(":order_status", $status);
+        $this->db->bind(":order_id", $orderID);
+        $this->db->execute();
     }
 
 }

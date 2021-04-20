@@ -167,6 +167,12 @@ class Employees extends Controller {
         $data["order"] = $order;
         $data["itemList"] = $itemList;
 
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $this->userModel->setOrderStatus($data["order"]->order_id, $_POST["new_status"]);
+            header("location: /grocerystore/employees/vieworder?id=" . $_GET["id"]);
+        }
+
       
         // sends data to the view
         $this->view('employees/orders/vieworder', $data);

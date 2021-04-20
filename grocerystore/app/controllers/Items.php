@@ -59,10 +59,16 @@ class Items extends Controller {
 
             $data = [
                 "itemID" => $_GET["id"],
-                "item" => null
+                "item" => null,
+                "quantity" => 0
             ];
 
             $data["item"] = $this->itemModel->getItem($data["itemID"]);
+            $data["quantity"] = ($data["item"]->item_quantity > 5) ? "In stock" : "Only " . $data["item"]->item_quantity . " left in stock";
+
+            if (!$data["item"]->item_quantity) {
+                $data["quantity"] = "Out of stock";
+            }
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -73,10 +79,14 @@ class Items extends Controller {
 
             $data = [
                 "itemID" => $_GET["id"],
-                "success" => ""
+                "success" => "",
+                "quantity" => 0
             ];
 
+            
+
             $data["item"] = $this->itemModel->getItem($data["itemID"]);
+            $data["quantity"] = ($data["item"]->item_quantity > 5) ? "In stock" : "Only " . $data["item"]->item_quantity . " left in stock";
 
             if (!isset($_SESSION["cart"][$_GET["id"]])) {
                 $_SESSION["cart"][$_GET["id"]][0] = $data["item"];

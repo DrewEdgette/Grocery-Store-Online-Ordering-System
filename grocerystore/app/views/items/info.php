@@ -11,12 +11,15 @@
 echo "<h1>" . $data["item"]->item_name . "</h1>";
 echo "<img src='" . $data["item"]->image_url . "'></img>";
 echo "<h2>$" . $data["item"]->item_price . "</h2>";
+echo "<h2>" . $data["quantity"] . "</h2>";
+
+if ($data["item"]->item_quantity) {
+    echo "<form method='post' action=''><input type='submit' name='submit' value='Add to cart'></form>";
+}
 ?>
 
 
-<form method="post" action="">
-    <input type="submit" name="submit" value="Add to cart">
-</form>
+
 
 <div class="error-field">
 
