@@ -32,7 +32,14 @@ class Carts extends Controller {
             $newQuantity = $_POST["quantity"];
             $itemID = array_key_last($_POST);
 
-            $_SESSION["cart"][$itemID][1] = $newQuantity;
+            if (!$newQuantity) {
+                unset($_SESSION["cart"][$itemID]);
+            }
+
+            else {
+                $_SESSION["cart"][$itemID][1] = $newQuantity;
+            }
+
 
             //echo $data["cart"][$itemID][1];
 
@@ -70,6 +77,7 @@ class Carts extends Controller {
         $data["total"] = $this->cartModel->getTotal($data["subtotal"], $data["tax"]);
 
 
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $this->cartModel->placeOrder($data);
             
@@ -79,21 +87,6 @@ class Carts extends Controller {
 
         // sends data to the view
         $this->view('carts/checkout', $data);
-    }
-
-
-    public function changeQuantity() {
-        if (!isset($_SESSION["userid"])) {
-            header("location: /grocerystore/customers/login");
-        }
-
-        $data = [
-            "cart" => $_SESSION["cart"],
-        ];
-
-
-        // sends data to the view
-        $this->view('carts/changequantity', $data);
     }
 
 

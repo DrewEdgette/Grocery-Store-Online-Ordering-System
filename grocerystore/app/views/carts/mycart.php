@@ -26,7 +26,7 @@
           echo "<select name='quantity'>";
           echo "<option value='none' selected disabled hidden>" . $item[1] ."</option>";
 
-          for ($i=1; $i<11; $i++) {
+          for ($i=0; $i<11; $i++) {
             echo "<option>" . $i . "</option>";
           }
 
