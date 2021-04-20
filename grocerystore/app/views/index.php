@@ -13,29 +13,38 @@
 </section>
 
 
-<article class = "FeaturedItems">
-    <h1>Featured Items: </h1>
+<article>
+    
+
+</article>
+
+<section class = "FeaturedItems">
+<h1>Featured Items: </h1>
 <?php
     echo "<table>";
     foreach($data["featured_items"] as $item) {
+        
+        echo "<td>";
 
         echo "<tr>";
-		echo "<th>Item Name</th>";
         echo "<th><img src='" . $item->image_url . "'></img></th>";
-        echo "<th>Item Price</th>";
-		echo "<th>Item Weight</th>";
         echo "</tr>";
         
         echo "<tr>";
 		echo "<td>" . $item->item_name . "</td>";
-        echo "<td>" . $item->item_price . "</td>";
         echo "</tr>";
-    }
 
+        echo "<tr>";
+        echo "<td>" . "$" . $item->item_price . "</td>";
+        echo "</tr>";
+        
+        echo "</td>";
+        
+		
+    }
     echo "</table>";
 ?>
-
-</article>
+</section>
 
 <?php
     require APPROOT . "/views/includes/footer.php";
