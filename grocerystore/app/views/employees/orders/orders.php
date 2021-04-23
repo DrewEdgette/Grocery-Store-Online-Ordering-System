@@ -2,12 +2,12 @@
     require APPROOT . "/views/includes/header.php";
 ?>
 
+<div class="main-area">
 
 <body>
 
-<div class="my-account"><h1>Customer Orders</h1></div>
+<div class="my-account"><h1>Customer Orders</h1>
 
-<div class="main-area">
 
 <?php
   foreach ($data["orders"] as $order) {
@@ -23,9 +23,11 @@
 
 </div>
 
+</body>
 
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
-</body>
+</div>
+

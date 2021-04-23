@@ -2,52 +2,35 @@
     require APPROOT . "/views/includes/header.php";
 ?>
 
+<div class="main-area">
+
 <body>
     <div class="greeting">
-        <h1>Welcome to the 5 Brothers' Grocery Closet Online Website!</h1>
+        <h1>5 Brothers' Grocery Closet Online Website</h1>
     </div>
 
-    
-<section class = "image">
-<img src="/grocerystore/public/images/home_image.jpg" alt="Trulli">   
-</section>
-
-
-<article>
-    
-
-</article>
-
-<section class = "FeaturedItems">
-<h1>Featured Items: </h1>
+<section class = "featured-items">
+<h1>Featured Items</h1>
+<div class="grid-container">
 <?php
-    echo "<table>";
     foreach($data["featured_items"] as $item) {
-        
-        echo "<td>";
 
-        echo "<tr>";
-        echo "<th><img src='" . $item->image_url . "'></img></th>";
-        echo "</tr>";
-        
-        echo "<tr>";
-		echo "<td>" . $item->item_name . "</td>";
-        echo "</tr>";
-
-        echo "<tr>";
-        echo "<td>" . "$" . $item->item_price . "</td>";
-        echo "</tr>";
-        
-        echo "</td>";
-        
-		
+        echo "<div class='clickable-section-box'>";
+        echo "<img src='" . $item->image_url . "'></img>";
+        echo $item->item_name . "<br> <br>";
+        echo "$" . $item->item_price;
+        echo "</div>";
+    
     }
-    echo "</table>";
 ?>
+</div>
 </section>
 
-<?php
+ </body>
+
+ <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
- </body>
+ </div>
+ 

@@ -3,11 +3,11 @@
 ?>
 <html>
 
-<body>
-
 <div class="main-area">
 
-<div class="my-account"><h1>Change Address</h1></div>
+<body>
+
+<div class="my-account"><h1>Change Address</h1>
 
 <div class="section-box">
 
@@ -43,16 +43,19 @@
 
 </div>
 
+
 <div class="goto-signup">
         <?php echo "<a href='/grocerystore/customers/deleteaddress?id=" . $_GET["id"] . "'><button>Delete address</button></a>"; ?>
     </div>
 
 </div>
 
+</body>
+
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
-</body>
+</div>
 
 </html>

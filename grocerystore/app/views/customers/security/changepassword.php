@@ -3,11 +3,11 @@
 ?>
 
 
-<body>
-
 <div class="main-area">
 
-<div class="my-account"><h1>Change Password</h1></div>
+<body>
+
+<div class="my-account"><h1>Change Password</h1>
 
 <div class="section-box">
 
@@ -62,9 +62,12 @@ Re-enter new password: <br>
 </div>  
 </div>
 
+</body>
+
 
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
-</body>
+</div>
+

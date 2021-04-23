@@ -2,12 +2,12 @@
     require APPROOT . "/views/includes/header.php";
 ?>
 
+<div class="main-area">
 
 <body>
 
-<div class="my-account"><h1>Your Account</h1></div>
+<div class="my-account"><h1>Your Account</h1>
 
-<div class="main-area">
 
   <div class="clickable-section-box" onclick="location.href='../employees/orders'">
     <h2>Fulfill an order</h2>
@@ -31,11 +31,14 @@
 
 </div>
 
+</body>
+
   <?php
     require APPROOT . "/views/includes/footer.php";
   ?>
 
-</body>
+</div>
+
 
 </div>
 </html>

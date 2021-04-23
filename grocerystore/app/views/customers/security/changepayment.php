@@ -3,11 +3,11 @@
 ?>
 
 
-<body>
-
 <div class="main-area">
 
-<div class="my-account"><h1>Change Payment</h1></div>
+<body>
+
+<div class="my-account"><h1>Change Payment</h1>
 
 <div class="section-box">
 
@@ -48,9 +48,11 @@
 </div>  
 </div>
 
+</body>
 
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
-</body>
+</div>
+

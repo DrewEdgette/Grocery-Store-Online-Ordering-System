@@ -2,12 +2,14 @@
     require APPROOT . "/views/includes/header.php";
 ?>
 
-<body>
+
 
 <div class="main-area">
-<div class="my-account"><h1>Your Addresses</h1> <?php echo $data["noaddress"]; ?> </div>
-    <?php
 
+<body>
+
+<div class="my-account"><h1>Your Addresses</h1> <?php echo $data["noaddress"]; ?>
+<?php
 
       foreach ($data["addresses"] as $address) {
         echo "<div class='section-box'>";
@@ -26,11 +28,13 @@
 </div>
 
 </div>
-
+</body>
 
 
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
-</body>
+
+</div>
+
 </html>

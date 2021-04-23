@@ -63,12 +63,12 @@
 
     </div>
 
-    </div>
-
-    <?php
-    require APPROOT . "/views/includes/footer.php";
-    ?>
-
 </body>
+
+<?php
+    require APPROOT . "/views/includes/footer.php";
+?>
+
+</div>
 
 </html>

@@ -2,12 +2,11 @@
     require APPROOT . "/views/includes/header.php";
 ?>
 
+<div class="main-area">
 
 <body>
 
-<div class="main-area">
-
-<div class="my-account"><h1>Change Email</h1></div>
+<div class="my-account"><h1>Change Email</h1>
 
 <div class="section-box">
 
@@ -43,9 +42,11 @@
 </div>  
 </div>
 
+</body>
 
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
-</body>
+</div>
+

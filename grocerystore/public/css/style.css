@@ -5,14 +5,11 @@ html{
 }
 
 body {
-    float: none;
-    width: 90%;
-    min-height: 100%;
-    margin: auto;
-    background-color: white;
-	-moz-box-shadow: rgba(31, 61, 31, 0.9) 20px 0px 25px,  rgba(31, 61, 31, 0.9) -20px 0px 25px;
-	-webkit-box-shadow: rgba(31, 61, 31, 0.9) 20px 0px 25px,  rgba(31, 61, 31, 0.9) -20px 0px 25px;
-	box-shadow: rgba(31, 61, 31, 0.9) 20px 0px 25px,  rgba(31, 61, 31, 0.9) -20px 0px 25px
+    background-image: url("/grocerystore/public/images/home_image.jpg");
+    background-size: 100%;
+    margin:0;
+    padding:0;
+    height:100%;
 }
 
 h1, h2, h3 {
@@ -20,6 +17,7 @@ h1, h2, h3 {
 }
 
 .backgroundInfo {
+    background-color: ghostwhite;
     float: none;
     margin: 100px;
     padding: 10px 80px;
@@ -41,10 +39,6 @@ h1, h2, h3 {
     
 }
 
-.FeaturedItems{
-    margin-left: 20px;
-    margin-bottom: 20px;
-}
 
 .header {
   background-color: #151926;
@@ -82,11 +76,8 @@ h1, h2, h3 {
 
 
 
-
-
-
-
 .section-box {
+    background-color: ghostwhite;
     border: solid darkgray;
     border-width: 1px;
     border-radius: 5px;
@@ -142,9 +133,15 @@ h1, h2, h3 {
 .my-account {
     margin: 20px auto;
     text-align: center;
+    width: 30%;
+    background-color: ghostwhite;
+    padding: 10px 0px;
+    border-radius: 8px;
+
 }
 
 .clickable-section-box {
+    background-color: white;
     border: solid darkgray;
     border-width: 1px;
     border-radius: 5px;
@@ -176,7 +173,33 @@ h1, h2, h3 {
     
 }
 
+.featured-items {
+    text-align: center;
+    margin: 200px 30px 200px 30px;
+    max-height: 100%;
+    background-color: ghostwhite;
+    padding: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    background-color: ghostwhite;
+    padding: 0;
+}
+
+.grid-container div {
+    width: 80%;
+}
+
+.grid-container div:hover {
+    width: 80%;
+}
+
+
+
 .goto-signup {
+    background-color: ghostwhite;
     color: darkgray;
     text-align: center;
     padding: 10px;
@@ -189,7 +212,10 @@ h1, h2, h3 {
 }
 
 .main-area {
-    min-height: 100vh;
+    min-height: 100%;
+    position: relative;
+    overflow: auto;
+    padding-bottom: 120px;
 }
 
 
@@ -205,13 +231,16 @@ button {
 
 
 footer {
-    position: fixed;
-    left: 10;
-    bottom: 0;
-    width: 90%;
-    text-align: center;
     color: white;
-    background-color: black;
-    padding: 10px 0;
-    margin: auto;
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    margin-top: -120px;
+    background: black;
+
+    align-items:center;
+    justify-content:center;
+    display: flex;
   }

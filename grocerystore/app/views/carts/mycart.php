@@ -2,12 +2,12 @@
     require APPROOT . "/views/includes/header.php";
 ?>
 
+<div class="main-area">
 
 <body>
 
-<div class="my-account"><h1>Your Cart</h1></div>
+<div class="my-account"><h1>Your Cart</h1>
 
-<div class="main-area">
 <?php
 
       if (empty($data["cart"])) {
@@ -44,9 +44,11 @@
 
 ?>
 
+</body>
 
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
-</body>
+</div>
+

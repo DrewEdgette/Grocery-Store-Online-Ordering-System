@@ -3,11 +3,14 @@
 ?>
 
 
-<body>
-
-<div class="my-account"><h1>Your Account</h1></div>
 
 <div class="main-area">
+
+<body>
+
+<div class="my-account"><h1>Your Account</h1>
+
+
 
   <div class="clickable-section-box" onclick="location.href='../customers/orders'">
     <h2>Your orders</h2>
@@ -26,13 +29,16 @@
     <p>View and update email and password</p>
   </div>
 
+</body>
+
+
 </div>
 
-  <?php
+<?php
     require APPROOT . "/views/includes/footer.php";
-  ?>
+?>
 
-</body>
+</div>
 
 </div>
 </html>

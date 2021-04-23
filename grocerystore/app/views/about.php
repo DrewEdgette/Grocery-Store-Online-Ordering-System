@@ -4,7 +4,7 @@
 
 ?>
 
- 
+<div class="main-area">
 
 <body>
 
@@ -38,16 +38,12 @@
 
 </article>
 
- 
-
- 
-
-    <?php
-
-    require APPROOT . "/views/includes/footer.php";
-
-    ?>
-
- 
 
 </body>
+
+<?php
+    require APPROOT . "/views/includes/footer.php";
+?>
+
+
+</div>

@@ -2,12 +2,12 @@
     require APPROOT . "/views/includes/header.php";
 ?>
 
+<div class="main-area">
 
 <body>
 
-<div class="my-account"><h1>Checkout</h1></div>
+<div class="my-account"><h1>Checkout</h1>
 
-<div class="main-area">
 
 <div class="section-box">
 
@@ -17,7 +17,6 @@
 
     foreach ($_SESSION["cart"] as $item) {
         echo "<p>" . $item[0]->item_name . "</p>";
-        echo "<img src='" . $item[0]->image_url . "'></img>";
         echo "<p>$" . $item[0]->item_price * $item[1] . "</p>";
         echo "<p>Quantity: " . $item[1] . "</p>";
     }
@@ -41,10 +40,10 @@
 
 </div>
 
-
+</body>
 
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
-</body>
+</div>

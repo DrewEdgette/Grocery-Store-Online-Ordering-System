@@ -2,9 +2,10 @@
     require APPROOT . "/views/includes/header.php";
 ?>
 
+<div class="main-area">
+
 <body>
 
-<div class="main-area">
 
 <div class="section-box">
 <?php
@@ -47,5 +48,11 @@ echo "<h2> Quantity: " . $data["item"]->item_quantity
 </div>
 
 
-</div>
+
 </body>
+
+<?php
+    require APPROOT . "/views/includes/footer.php";
+?>
+
+</div>

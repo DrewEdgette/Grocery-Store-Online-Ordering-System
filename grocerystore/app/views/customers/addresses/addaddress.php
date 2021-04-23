@@ -3,11 +3,12 @@
 ?>
 <html>
 
-<body>
 
 <div class="main-area">
 
-<div class="my-account"><h1>Add Address</h1></div>
+<body>
+
+<div class="my-account"><h1>Add Address</h1>
 
 <div class="section-box">
 
@@ -46,10 +47,13 @@
 
 </div>
 
+</body>
+
 <?php
     require APPROOT . "/views/includes/footer.php";
 ?>
 
-</body>
+</div>
+
 
 </html>
