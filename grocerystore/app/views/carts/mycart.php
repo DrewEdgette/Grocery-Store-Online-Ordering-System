@@ -37,12 +37,13 @@
         }
 
       echo "<div class='goto-signup'>";
-      echo "<button onclick=document.location='/grocerystore/carts/checkout'>Go to checkout</button>";
-      echo "</div>";
+      echo "<button onclick=document.location='/grocerystore/carts/ordertype'>Go to checkout</button>";
       echo "</div>";
       }
 
 ?>
+
+</div>
 
 </body>
 

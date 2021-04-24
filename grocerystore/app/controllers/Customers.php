@@ -213,7 +213,8 @@ class Customers extends Controller {
                 $address->city,
                 $address->state,
                 $address->zip,
-                $address->phone
+                $address->phone,
+                $address->address_name
             ));
         }   
 
@@ -240,6 +241,7 @@ class Customers extends Controller {
             'current_state' => $address->state,
             'current_zip' => $address->zip,
             'current_phone' => $address->phone,
+            'current_name' => $address->address_name
         ];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -251,7 +253,9 @@ class Customers extends Controller {
                 'current_state' => $address->state,
                 'current_zip' => $address->zip,
                 'current_phone' => $address->phone,
+                'current_name' => $address->address_name,
 
+                'new_name' => $_POST["new_name"],
                 'new_address' => $_POST["new_address"],
                 'new_city' => $_POST["new_city"],
                 'new_state' => $_POST["new_state"],
@@ -279,6 +283,10 @@ class Customers extends Controller {
 
             if (!empty($_POST["new_phone"])) {
                 $this->userModel->updateAddress($_GET["id"], "phone", $data["new_phone"]);
+            }
+
+            if (!empty($_POST["new_name"])) {
+                $this->userModel->updateAddress($_GET["id"], "address_name", $data["new_name"]);
             }
 
             header("location: /grocerystore/customers/addresses");

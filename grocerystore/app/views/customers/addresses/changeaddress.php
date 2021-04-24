@@ -13,6 +13,11 @@
 
 <?php echo "<form method='post' action='/grocerystore/customers/changeaddress?id=" . $_GET["id"] . "'>";?>
 
+Address name: <br> <?php echo $data["current_name"] ?>
+<input type='text' name="new_name" placeholder="Change address name">
+
+<br>
+
   Address: <br> <?php echo $data["current_address"] ?>
   <input type='text' name="new_address" placeholder="Change address">
 
