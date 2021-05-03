@@ -140,11 +140,31 @@ class Employees extends Controller {
         $data = [
             "orders" => [],
         ];
+        
 
         $data["orders"] = $this->userModel->getOrders();
       
         // sends data to the view
         $this->view('employees/orders/orders', $data);
+    }
+
+
+
+    public function orderStats() {
+        $data = $this->data;
+
+        if (!$_SESSION["isEmployee"]) {
+            header("location: /grocerystore/employees/login");
+        }
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data["orderTotal"] = "Number of orders by this customer: " . $this->userModel->getOrderTotal($_POST["customer_id"]);
+        }
+      
+        // sends data to the view
+        $this->view('employees/orders/orderstats', $data);
     }
 
 

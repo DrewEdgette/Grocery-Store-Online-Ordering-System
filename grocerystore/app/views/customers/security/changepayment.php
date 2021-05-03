@@ -13,7 +13,7 @@
 
 <form method="post" action="/grocerystore/customers/changepayment">
 
-  Card Number: <br>
+  Card/Check Number (If you are paying cash, just type "Cash"): <br>
   <input type='text' name="payment" placeholder="New card number">
 
 <br>
@@ -55,4 +55,3 @@
 ?>
 
 </div>
-

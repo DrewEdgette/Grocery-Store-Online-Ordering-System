@@ -196,8 +196,6 @@ h1, h2, h3 {
     width: 80%;
 }
 
-
-
 .goto-signup {
     background-color: ghostwhite;
     color: darkgray;
@@ -207,7 +205,20 @@ h1, h2, h3 {
     margin: 0 auto;
   }
 
+  .goto-cart {
+    color: darkgray;
+    text-align: center;
+    padding: 10px;
+    width: 300px;
+    margin: 0 auto;
+  }
+
+
 .goto-signup button {
+    width: 100%;
+}
+
+.goto-cart button {
     width: 100%;
 }
 

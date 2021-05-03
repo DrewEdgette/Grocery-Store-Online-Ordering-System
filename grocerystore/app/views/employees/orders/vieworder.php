@@ -29,7 +29,6 @@
   foreach ($data["itemList"] as $item) {
     echo "<div class='section-box'>";
     echo $item->item_name . "<br>";
-    echo "<img src='" . $item->image_url . "'></img>";
     echo "</div>";
   } 
 ?>

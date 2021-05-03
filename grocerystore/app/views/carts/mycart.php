@@ -24,7 +24,7 @@
           echo "<p>$" . $item[0]->item_price *  $item[1]. "</p>";
           echo "<p> Quantity: " . $item[1] . "</p>";
           echo "<select name='quantity'>";
-          echo "<option value='none' selected disabled hidden>" . $item[1] ."</option>";
+          echo "<option value=1 selected hidden>" . $item[1] ."</option>";
 
           for ($i=0; $i<11; $i++) {
             echo "<option>" . $i . "</option>";
@@ -39,8 +39,8 @@
       echo "<div class='goto-signup'>";
       echo "<button onclick=document.location='/grocerystore/carts/ordertype'>Go to checkout</button>";
       echo "</div>";
+      echo "<button onclick=document.location='/grocerystore/carts/checkout'>Click here if you changed quantity in checkout.</button>";
       }
-
 ?>
 
 </div>
@@ -52,4 +52,3 @@
 ?>
 
 </div>
-

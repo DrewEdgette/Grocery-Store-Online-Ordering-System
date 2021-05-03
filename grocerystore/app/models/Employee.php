@@ -113,4 +113,11 @@ class Employee {
         $this->db->execute();
     }
 
+
+    public function getOrderTotal($id) {
+        $this->db->query("SELECT * FROM orders WHERE customer_id = :customer_id");
+        $this->db->bind(":customer_id", $id);
+        return $this->db->rowCount();
+    }
+
 }

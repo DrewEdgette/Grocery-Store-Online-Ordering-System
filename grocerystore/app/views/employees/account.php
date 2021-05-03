@@ -14,6 +14,11 @@
     <p>View and fulfill customer orders</p>
   </div>
 
+  <div class="clickable-section-box" onclick="location.href='../employees/orderstats'">
+    <h2>Order statistics</h2>
+    <p>View stats on how much is getting ordered</p>
+  </div>
+
   <div class="clickable-section-box" onclick="location.href='../employees/inventory'">
     <h2>Update inventory</h2>
     <p>View and update low-stock items</p>
@@ -27,6 +32,11 @@
   <div class="clickable-section-box" onclick="location.href='../employees/security'">
     <h2>Your login info</h2>
     <p>Update name and password</p>
+  </div>
+
+  <div class="clickable-section-box" onclick="location.href='../employees/register'">
+    <h2>Register employee</h2>
+    <p>Create new employee account</p>
   </div>
 
 </div>

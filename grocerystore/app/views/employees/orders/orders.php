@@ -1,7 +1,9 @@
 <?php
     require APPROOT . "/views/includes/header.php";
 ?>
-
+<?php
+error_reporting(0);
+?>
 <div class="main-area">
 
 <body>
@@ -22,12 +24,6 @@
 ?>
 
 </div>
-
 </body>
 
-<?php
-    require APPROOT . "/views/includes/footer.php";
-?>
-
 </div>
-

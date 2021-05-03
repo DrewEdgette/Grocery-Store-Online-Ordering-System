@@ -44,13 +44,22 @@ else {
 
 <h2>Receipt</h2>
 
-<form method="post" action="/grocerystore/carts/checkout">
-
 <?php
 
     foreach ($_SESSION["cart"] as $item) {
+	echo "<form action='/grocerystore/carts/mycart' method='post'>";
         echo "<p>" . $item[0]->item_name . "</p>";
         echo "<p>Quantity: " . $item[1] . "</p>";
+	echo "<select name='quantity'>";
+          echo "<option value='none' selected disabled hidden>" . $item[1] ."</option>";
+
+          for ($i=0; $i<11; $i++) {
+            echo "<option>" . $i . "</option>";
+          }
+
+          echo "</select>";
+          echo "<input type='submit' name='" . $item[0]->item_id . "' value='Change quantity'>";
+	  echo "</form>";
         echo "<p>$" . $item[0]->item_price * $item[1] . "</p>";
     }
     
@@ -59,13 +68,13 @@ else {
     echo "Sub-total: $" . $data["subtotal"] . "<br>";
     echo "Tax: $" . $data["tax"] . "<br>";
     echo "<h2>Total: $" . $data["total"] . "</h2><br>";
+    echo "</div>";
 ?>
-
+<form method="post" action="/grocerystore/carts/checkout">
 <input type="submit" name="submit" value="Place order">
 
 </form>
 
-</div>
 
 
 

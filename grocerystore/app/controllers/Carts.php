@@ -69,9 +69,13 @@ class Carts extends Controller {
             "subtotal" => 0.00,
             "total" => 0.00,
 
-            "orderAddressID" => $_SESSION["orderAddressID"],
+            "orderAddressID" => "",
             "payment" => $_SESSION["payment"],
         ];
+
+        if (isset($_SESSION["orderAddressID"])) {
+            $data["orderAddressID"] = $_SESSION["orderAddressID"];
+        }
 
         if (isset($_SESSION["orderType"])) {
             $data["orderType"] = $_SESSION["orderType"];

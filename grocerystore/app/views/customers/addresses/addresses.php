@@ -13,7 +13,7 @@
 
       foreach ($data["addresses"] as $address) {
         echo "<div class='section-box'>";
-        echo "<p>" . $address[6] . "</p>";
+        echo "<h2>" . $address[6] . "</h2>";
         echo "<p><strong>Address</strong><br>" . $address[1] . "</p>";
         echo "<p><strong>City</strong><br>" . $address[2] . "</p>";
         echo "<p><strong>State</strong><br>" . $address[3] . "</p>";
