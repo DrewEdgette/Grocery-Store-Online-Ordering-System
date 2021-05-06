@@ -114,8 +114,33 @@ class Employee {
     }
 
 
-    public function getOrderTotal($id) {
+    public function getOrderFrequency($id) {
         $this->db->query("SELECT * FROM orders WHERE customer_id = :customer_id");
+        $this->db->bind(":customer_id", $id);
+        return $this->db->rowCount();
+    }
+
+
+    public function getOrderDates($id) {
+        $this->db->query("SELECT order_date FROM orders WHERE customer_id = :customer_id");
+        $this->db->bind(":customer_id", $id);
+        return $this->db->resultSet();
+    }
+
+    public function getTotalSpent($id) {
+        $this->db->query("SELECT CAST(SUM(order_total) as DECIMAL(10,2)) as total FROM orders WHERE customer_id = :customer_id");
+        $this->db->bind(":customer_id", $id);
+        return $this->db->single()->total;
+    }
+
+    public function getTotalPending($id) {
+        $this->db->query("SELECT * FROM orders WHERE customer_id = :customer_id AND order_status = 'Pending'");
+        $this->db->bind(":customer_id", $id);
+        return $this->db->rowCount();
+    }
+
+    public function getTotalReady($id) {
+        $this->db->query("SELECT * FROM orders WHERE customer_id = :customer_id AND order_status = 'Ready'");
         $this->db->bind(":customer_id", $id);
         return $this->db->rowCount();
     }

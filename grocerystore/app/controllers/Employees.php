@@ -160,7 +160,33 @@ class Employees extends Controller {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data["orderTotal"] = "Number of orders by this customer: " . $this->userModel->getOrderTotal($_POST["customer_id"]);
+            if (isset($_POST["submit"])) {
+                $data["submit"] = "Number of orders by this customer:<br>" . $this->userModel->getOrderFrequency($_POST["customer_id"]);
+            }
+
+            else if (isset($_POST["submit2"])) {
+                $results = $this->userModel->getOrderDates($_POST["customer_id"]);
+                $data["submit"] = "Dates customer placed an order:<br>";
+
+                foreach ($results as $orderDate) {
+                    $data["submit"] .= $orderDate->order_date . "<br>";
+                }
+            }
+
+            else if (isset($_POST["submit3"])) {
+                $data["submit"] = "Total spent by this customer:<br>$" . $this->userModel->getTotalSpent($_POST["customer_id"]);
+            }
+
+            else if (isset($_POST["submit4"])) {
+                $data["submit"] = "Number of pending orders by this customer:<br>" . $this->userModel->getTotalPending($_POST["customer_id"]);
+            }
+
+            else if (isset($_POST["submit5"])) {
+                $data["submit"] = "Number of ready orders by this customer:<br>" . $this->userModel->getTotalReady($_POST["customer_id"]);
+            }
+            
+            
+        
         }
       
         // sends data to the view
