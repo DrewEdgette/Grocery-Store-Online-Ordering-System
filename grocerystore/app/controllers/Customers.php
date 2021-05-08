@@ -157,7 +157,7 @@ class Customers extends Controller {
     }
 
 
-    public function vieworder() {
+    public function viewOrder() {
         $data = $this->data;
 
         if (!isset($_SESSION["userid"])) {

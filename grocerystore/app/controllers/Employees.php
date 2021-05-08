@@ -273,6 +273,7 @@ class Employees extends Controller {
             ];
 
             $data["item"] = $this->itemModel->getItem($data["itemID"]);
+            $data["isFeatured"] = $data["item"]->featured ? true : false;
         }
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -283,10 +284,12 @@ class Employees extends Controller {
 
                 "new_name" => $_POST["new_name"],
                 "new_price" => $_POST["new_price"],
-                "new_quantity" => $_POST["new_quantity"]
+                "new_quantity" => $_POST["new_quantity"],
+                "new_featured" => $_POST["new_featured"]
             ];
 
             $data["item"] = $this->itemModel->getItem($data["itemID"]);
+            $data["isFeatured"] = $data["item"]->featured ? true : false;
 
 
              // check if input has been entered and update info for each field
@@ -300,6 +303,14 @@ class Employees extends Controller {
 
             if (!empty($_POST["new_quantity"])) {
                 $this->itemModel->updateItem($_GET["id"], "item_quantity", $data["new_quantity"]);
+            }
+
+            if (!empty($_POST["new_featured"])) {
+                $this->itemModel->setFeatured($_GET["id"], "true");
+            }
+
+            else if (empty($_POST["new_featured"])) {
+                $this->itemModel->setFeatured($_GET["id"], "");
             }
 
             header("location: /grocerystore/employees/changeitem?id=" . $_GET["id"]);

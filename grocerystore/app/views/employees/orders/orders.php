@@ -26,4 +26,8 @@ error_reporting(0);
 </div>
 </body>
 
+<?php
+    require APPROOT . "/views/includes/footer.php";
+?>
+
 </div>

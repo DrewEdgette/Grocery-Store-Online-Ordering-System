@@ -21,7 +21,9 @@ echo "<h2> Quantity: " . $data["item"]->item_quantity
 <input type='text' name="new_name" placeholder="New name">
 <input type='text' name="new_price" placeholder="New price">
 <input type='text' name="new_quantity" placeholder="New quantity">
-
+<p>Featured item
+<input type='checkbox' name="new_featured" placeholder="Is featured item" <?php echo $data["isFeatured"] ? "checked" : ""?>>
+</p>
 <input type='submit' value='Update item information'>
 </form>
 

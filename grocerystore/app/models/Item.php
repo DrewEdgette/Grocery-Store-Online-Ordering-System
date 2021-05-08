@@ -30,7 +30,7 @@
 
          // gets featured items
          public function getFeaturedItems() {
-            $this->db->query("SELECT * FROM items WHERE item_quantity > 0 ORDER BY RAND() LIMIT 5;");
+            $this->db->query("SELECT * FROM items WHERE featured = 'true';");
 
             return $this->db->resultSet();
         }
@@ -51,6 +51,16 @@
             $this->db->bind(":order_id", $orderID);
 
             return $this->db->resultSet();
+        }
+
+
+        // sets an item's featured value by id
+        public function setFeatured($id, $value) {
+            $this->db->query("UPDATE items SET featured = :value WHERE item_id = :id;");
+            $this->db->bind(":value", $value);
+            $this->db->bind(":id", $id);
+            
+            return $this->db->execute();
         }
 
 }

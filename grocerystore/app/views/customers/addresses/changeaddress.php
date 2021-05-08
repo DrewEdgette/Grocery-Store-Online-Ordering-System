@@ -51,7 +51,7 @@ Address name: <br> <?php echo $data["current_name"] ?>
 
 <div class="goto-signup">
         <?php echo "<a href='/grocerystore/customers/deleteaddress?id=" . $_GET["id"] . "'><button>Delete address</button></a>"; ?>
-    </div>
+</div>
 
 </div>
 

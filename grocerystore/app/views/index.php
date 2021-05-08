@@ -15,7 +15,12 @@
 <?php
     foreach($data["featured_items"] as $item) {
 
-        echo "<div class='clickable-section-box' onclick=location.href='/grocerystore/items/info?id=" . $item->item_id . "'>";
+        if (!isset($_SESSION["isEmployee"]) || !$_SESSION["isEmployee"]) {
+            echo "<div class='clickable-section-box' onclick=location.href='/grocerystore/items/info?id=" . $item->item_id . "'>";
+        }
+        else {
+            echo "<div class='clickable-section-box' onclick=location.href='/grocerystore/employees/changeitem?id=" . $item->item_id . "'>";
+        }
         echo "<img src='" . $item->image_url . "'></img>";
         echo $item->item_name . "<br> <br>";
         echo "$" . $item->item_price;

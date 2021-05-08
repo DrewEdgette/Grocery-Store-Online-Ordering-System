@@ -111,6 +111,10 @@ h1, h2, h3 {
     border-radius: 4px;
     cursor: pointer;
   }
+
+  .section-box input[type=checkbox] {
+    width: 100%;
+  }
   
 .section-box input[type=submit]:hover, .section-box button:hover {
     background-color: #a7bfcc;
@@ -239,6 +243,7 @@ button {
     font-weight: bold;
     color: red;
 }
+
 
 
 footer {
