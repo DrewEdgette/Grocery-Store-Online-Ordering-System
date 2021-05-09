@@ -52,14 +52,17 @@ class Cart {
             $this->db->bind(":item_price", $item[0]->item_price);
             $this->db->bind(":order_id", $orderID);
 
+            //$this->setItemQuantity($item,$item[1]);
+
             $this->db->execute();
         }
-        
+
+        foreach ($data["cart"] as $item) {
+            $this->db->query("UPDATE items SET item_quantity = item_quantity - :item_quantity where item_id = :item_id;");
+            $this->db->bind(":item_id", $item[0]->item_id);
+            $this->db->bind(":item_quantity", $item[1]);
+
+		    $this->db->execute();
+        }
     }
-
-
-    public function setItemQuantity($item, $quantity) {
-
-    }
-    
 }
